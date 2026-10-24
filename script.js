@@ -12,16 +12,44 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ---------- 2. MOBILE MENU ---------- */
+ /* ---------- 2. MOBILE MENU FIX ---------- */
 const menuBtn = document.getElementById('mobile-menu');
 const navMenu = document.querySelector('.nav-menu');
+
 if (menuBtn && navMenu) {
+    // Buka / Tutup Menu
     menuBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         e.stopPropagation();
+        
         const isOpen = navMenu.classList.toggle('active');
-        menuBtn.classList.toggle('open', isOpen);
+        menuBtn.classList.toggle('open');
+        
+        // Cegah halaman di-scroll saat menu kebuka
         document.body.style.overflow = isOpen ? 'hidden' : '';
     });
+
+    // Tutup menu jika salah satu link diklik
+    navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBtn.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    });
+
+    // Tutup menu jika area di luar menu diklik
+    document.addEventListener('click', (e) => {
+        if (navMenu.classList.contains('active') && 
+            !navMenu.contains(e.target) && 
+            !menuBtn.contains(e.target)) {
+            
+            navMenu.classList.remove('active');
+            menuBtn.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    });
+}
 
     // Tutup menu saat klik link (termasuk link ke halaman lain)
     navMenu.querySelectorAll('a').forEach(link => {
