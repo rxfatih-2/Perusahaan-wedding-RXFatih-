@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galeri — Rxfatih Atelier</title>
-    <meta name="description" content="Arsip momen pernikahan yang pernah dirancang Rxfatih Atelier — tenda, catering, sound, fotografi.">
+    <title>Paket Gold — Rxfatih Atelier</title>
+    <meta name="description" content="Paket Gold Rxfatih Atelier: tenda roder premium, catering 500 pax, sound & lighting profesional, dokumentasi cinematic.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -23,7 +23,8 @@
                 </span>
             </a>
             <nav class="nav">
-                <ul class="nav-menu">
+                <!-- TAMBAHAN ID="navMenu" -->
+                <ul class="nav-menu" id="navMenu">
                     <li><a href="index.html#services" class="nav-link"><span>01</span> Layanan</a></li>
                     <li><a href="index.html#packages" class="nav-link"><span>02</span> Paket</a></li>
                     <li><a href="gallery.html" class="nav-link"><span>03</span> Galeri</a></li>
@@ -31,118 +32,120 @@
                 </ul>
                 <a href="index.html#contact" class="nav-cta">Reservasi <i class="fa-solid fa-arrow-right-long"></i></a>
             </nav>
-            <button class="menu-toggle" id="mobile-menu" aria-label="Menu">
+            <!-- UBAH ID JADI id="mobileMenu" -->
+            <button class="menu-toggle" id="mobileMenu" aria-label="Menu">
                 <span></span><span></span>
             </button>
         </div>
     </header>
 
-    <main class="gallery-page">
+    <main class="pkg-detail">
         <div class="container">
 
-            <div class="back-link">
-                <a href="index.html"><i class="fa-solid fa-arrow-left-long"></i> Kembali ke Beranda</a>
+            <div class="pkg-detail-back">
+                <a href="index.html#packages" class="gallery-link">
+                    <i class="fa-solid fa-arrow-left-long"></i> Kembali ke Paket
+                </a>
             </div>
 
-            <div class="gallery-page-head">
-                <p class="eyebrow"><span class="dot"></span> Galeri Lengkap</p>
-                <h1>Arsip <em>momen</em><br>yang kami rawat.</h1>
-                <p>Kumpulan pernikahan yang pernah kami rancang — dari akad intim hingga resepsi seribu tamu.</p>
+            <div class="pkg-detail-grid">
+
+                <div class="pkg-detail-media">
+                    <img src="images/hero-bg.jpg" alt="Paket Gold Rxfatih Atelier">
+                </div>
+
+                <div>
+                    <div class="pkg-detail-head">
+                        <p class="eyebrow"><span class="dot"></span> Paket II · Favorit</p>
+                        <h1>Gold <em>Package</em></h1>
+                        <p class="pkg-detail-desc">
+                            Pilihan paling seimbang untuk pernikahan 500 tamu —
+                            tenda roder dengan dekorasi premium, buffet lengkap,
+                            sound &amp; lighting profesional, dan dokumentasi
+                            cinematic sepanjang hari.
+                        </p>
+                    </div>
+
+                    <div class="pkg-detail-price">
+                        <span class="currency">Rp</span>
+                        <span class="amount">45</span>
+                        <span class="unit">Juta</span>
+                    </div>
+
+                    <ul class="pkg-detail-features">
+                        <li><i class="fa-solid fa-check"></i> Tenda roder ukuran 15×20 m + dekorasi premium floral &amp; lighting</li>
+                        <li><i class="fa-solid fa-check"></i> Catering 500 pax (buffet 30 menu + 3 live cooking station)</li>
+                        <li><i class="fa-solid fa-check"></i> Sound system line array + MC + lighting moving head</li>
+                        <li><i class="fa-solid fa-check"></i> Fotografi &amp; video cinematic full day (2 fotografer, 2 videografer)</li>
+                        <li><i class="fa-solid fa-check"></i> Album premium 20 lembar + same day edit video</li>
+                        <li><i class="fa-solid fa-check"></i> Free konsultasi wedding organizer (2× pertemuan)</li>
+                    </ul>
+
+                    <div class="pkg-detail-actions">
+                        <a href="https://wa.me/628826621362?text=Halo%20Rxfatih%2C%20saya%20tertarik%20Paket%20Gold" target="_blank" class="btn btn-gold">
+                            <i class="fa-brands fa-whatsapp"></i> Pesan Paket Gold
+                        </a>
+                        <a href="index.html#contact" class="btn btn-outline-dark">
+                            Konsultasi Dulu
+                        </a>
+                    </div>
+
+                    <div class="pkg-detail-note">
+                        <strong>Catatan:</strong> Harga belum termasuk biaya transportasi
+                        luar kota dan akomodasi tim. Semua paket dapat disesuaikan
+                        — kami senang merancang bersama Anda.
+                    </div>
+                </div>
             </div>
 
-            <div class="gallery-filter" id="galleryFilter">
-                <button class="filter-btn active" data-filter="all">Semua</button>
-                <button class="filter-btn" data-filter="tenda">Tenda</button>
-                <button class="filter-btn" data-filter="catering">Catering</button>
-                <button class="filter-btn" data-filter="sound">Sound &amp; Lighting</button>
-                <button class="filter-btn" data-filter="foto">Fotografi</button>
-            </div>
+            <div class="pkg-detail-other">
+                <h2>Paket <em>lainnya</em>.</h2>
+                <div class="package-grid">
 
-            <div class="gallery-page-grid" id="galleryGrid">
-                <figure class="g-item g-wide" data-cat="tenda">
-                    <img src="images/gallery1.jpg" alt="Akad outdoor">
-                    <figcaption>
-                        <span class="g-title">Akad di Bawah Roder</span>
-                        <span class="g-meta">Bandung · 2025</span>
-                    </figcaption>
-                </figure>
-                <figure class="g-item" data-cat="catering">
-                    <img src="images/gallery2.jpg" alt="Resepsi">
-                    <figcaption>
-                        <span class="g-title">Meja Prasmanan</span>
-                        <span class="g-meta">Jakarta · 2025</span>
-                    </figcaption>
-                </figure>
-                <figure class="g-item g-tall" data-cat="tenda">
-                    <img src="images/gallery3.jpg" alt="Detail dekorasi">
-                    <figcaption>
-                        <span class="g-title">Detail Floral</span>
-                        <span class="g-meta">Bogor · 2024</span>
-                    </figcaption>
-                </figure>
-                <figure class="g-item" data-cat="sound">
-                    <img src="images/gallery4.jpg" alt="Lighting">
-                    <figcaption>
-                        <span class="g-title">Cahaya Malam</span>
-                        <span class="g-meta">Surabaya · 2024</span>
-                    </figcaption>
-                </figure>
-                <figure class="g-item g-wide" data-cat="foto">
-                    <img src="images/gallery5.jpg" alt="Momen akad">
-                    <figcaption>
-                        <span class="g-title">Satu Janji</span>
-                        <span class="g-meta">Yogyakarta · 2025</span>
-                    </figcaption>
-                </figure>
-                <figure class="g-item" data-cat="catering">
-                    <img src="images/gallery6.jpg" alt="Food stall">
-                    <figcaption>
-                        <span class="g-title">Food Stall</span>
-                        <span class="g-meta">Bali · 2024</span>
-                    </figcaption>
-                </figure>
-                <figure class="g-item" data-cat="tenda">
-                    <img src="images/gallery1.jpg" alt="Tenda transparan">
-                    <figcaption>
-                        <span class="g-title">Tenda Transparan</span>
-                        <span class="g-meta">Bandung · 2025</span>
-                    </figcaption>
-                </figure>
-                <figure class="g-item g-tall" data-cat="foto">
-                    <img src="images/gallery2.jpg" alt="Foto pengantin">
-                    <figcaption>
-                        <span class="g-title">Potret Pengantin</span>
-                        <span class="g-meta">Jakarta · 2025</span>
-                    </figcaption>
-                </figure>
-                <figure class="g-item" data-cat="sound">
-                    <img src="images/gallery3.jpg" alt="Sound setup">
-                    <figcaption>
-                        <span class="g-title">Line Array</span>
-                        <span class="g-meta">Bogor · 2024</span>
-                    </figcaption>
-                </figure>
-                <figure class="g-item" data-cat="tenda">
-                    <img src="images/gallery4.jpg" alt="Dekorasi meja">
-                    <figcaption>
-                        <span class="g-title">Meja Akad</span>
-                        <span class="g-meta">Surabaya · 2025</span>
-                    </figcaption>
-                </figure>
-                <figure class="g-item g-wide" data-cat="catering">
-                    <img src="images/gallery5.jpg" alt="Buffet setup">
-                    <figcaption>
-                        <span class="g-title">Buffet Premium</span>
-                        <span class="g-meta">Yogyakarta · 2024</span>
-                    </figcaption>
-                </figure>
-                <figure class="g-item" data-cat="foto">
-                    <img src="images/gallery6.jpg" alt="Momen resepsi">
-                    <figcaption>
-                        <span class="g-title">Tawa Resepsi</span>
-                        <span class="g-meta">Bali · 2025</span>
-                    </figcaption>
-                </figure>
+                    <article class="pkg-card">
+                        <header class="pkg-head">
+                            <span class="pkg-index">I</span>
+                            <h3 class="pkg-name">Silver</h3>
+                            <p class="pkg-for">300 tamu · intimate</p>
+                        </header>
+                        <div class="pkg-price">
+                            <span class="pkg-currency">Rp</span>
+                            <span class="pkg-amount">25</span>
+                            <span class="pkg-unit">Juta</span>
+                        </div>
+                        <a href="package-detail.html" class="pkg-btn">Lihat Silver <i class="fa-solid fa-arrow-right-long"></i></a>
+                    </article>
+
+                    <article class="pkg-card featured">
+                        <span class="pkg-badge">Anda di sini</span>
+                        <header class="pkg-head">
+                            <span class="pkg-index">II</span>
+                            <h3 class="pkg-name">Gold</h3>
+                            <p class="pkg-for">500 tamu · favorit</p>
+                        </header>
+                        <div class="pkg-price">
+                            <span class="pkg-currency">Rp</span>
+                            <span class="pkg-amount">45</span>
+                            <span class="pkg-unit">Juta</span>
+                        </div>
+                        <a href="#" class="pkg-btn solid" onclick="return false;">Sedang Dilihat <i class="fa-solid fa-eye"></i></a>
+                    </article>
+
+                    <article class="pkg-card">
+                        <header class="pkg-head">
+                            <span class="pkg-index">III</span>
+                            <h3 class="pkg-name">Platinum</h3>
+                            <p class="pkg-for">1000 tamu · penuh</p>
+                        </header>
+                        <div class="pkg-price">
+                            <span class="pkg-currency">Rp</span>
+                            <span class="pkg-amount">75</span>
+                            <span class="pkg-unit">Juta</span>
+                        </div>
+                        <a href="package-detail.html" class="pkg-btn">Lihat Platinum <i class="fa-solid fa-arrow-right-long"></i></a>
+                    </article>
+
+                </div>
             </div>
 
         </div>
@@ -162,4 +165,4 @@
 
     <script src="script.js"></script>
 </body>
-                          </html>
+</html>
