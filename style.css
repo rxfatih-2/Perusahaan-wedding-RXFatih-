@@ -740,7 +740,9 @@ a.contact-value:hover { color: var(--champagne); }
 .footer-bottom p { font-size: .78rem; color: rgba(247,242,234,.45); letter-spacing: .03em; }
 .footer-legal { display: flex; gap: 1.8rem; }
 .footer-legal a { font-size: .78rem; color: rgba(247,242,234,.45); transition: color .3s; }
-.footer-legal a:hover { color: var(--champagne); }/* ---------- 14. RESPONSIVE ---------- */
+.footer-legal a:hover { color: var(--champagne); }
+
+/* ---------- 14. RESPONSIVE FIXED ---------- */
 @media (max-width: 1100px) {
     .section { padding: 100px 0; }
     .packages-head { margin-bottom: 4rem; }
@@ -750,19 +752,66 @@ a.contact-value:hover { color: var(--champagne); }
     .contact-form-wrap { padding: 5rem 3rem 5rem 4%; }
     .contact-info { padding: 5rem 4% 5rem 3rem; }
 }
+
 @media (max-width: 1000px) {
-    .nav-menu { display: none; }
-    .menu-toggle { display: flex; }
-    .nav-cta { display: none; }
-    .nav-menu.active {
-        display: flex; position: fixed; inset: 0;
+    /* --- MOBILE MENU FIX --- */
+    .nav-menu {
+        display: flex;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
         background: var(--brown-deep);
-        flex-direction: column; align-items: center; justify-content: center;
-        gap: 2rem; z-index: 99;
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: center;
+        gap: 2rem; 
+        z-index: 999; /* Biar di atas navbar */
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s cubic-bezier(.22,.61,.36,1);
     }
-    .nav-menu.active .nav-link { font-size: 1.1rem; }
+    
+    .nav-menu.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav-menu .nav-link { 
+        font-size: 1.1rem; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .nav-menu .nav-link span {
+        font-size: 0.8rem;
+        margin-right: 0;
+    }
+
+    /* --- TOMBOL X FIX --- */
+    .menu-toggle { 
+        display: flex; 
+        z-index: 1000; /* Harus paling tinggi */
+        position: relative;
+    }
+    
+    .menu-toggle.open span {
+        background: var(--champagne);
+    }
+
+    .menu-toggle.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle.open span:nth-child(2) {
+        transform: translateY(-1px) rotate(-45deg);
+    }
+
+    .nav-cta { display: none; }
     .hero-card { display: none; }
     .hero-scroll { display: none; }
+    
+    /* --- SECTION FIXES --- */
     .section-head { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 3rem; }
     .section-desc { margin-left: 0; }
     .service-row { grid-template-columns: 50px 1fr; gap: 1rem; padding: 2rem 0; }
@@ -786,51 +835,68 @@ a.contact-value:hover { color: var(--champagne); }
     .footer-main { grid-template-columns: 1fr 1fr; gap: 3rem; padding: 4rem 0 3rem; }
     .footer-brand { grid-column: span 2; max-width: 100%; }
 }
+
 @media (max-width: 768px) {
     .section { padding: 80px 0; }
     .hero { min-height: 640px; }
-    .hero h1 { font-size: 2.5rem; }
+    .hero-title { font-size: 2.5rem; }
     .hero-actions { flex-direction: column; }
     .hero-actions .btn { justify-content: center; }
+    
     .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
     .stat:nth-child(2)::after { display: none; }
-    .testi-quote-mark { font-size: 8rem; margin-bottom: -2rem; }
+    
+    /* --- TESTIMONI TEKS KEPOTONG FIX --- */
+    .testi-quote {
+        font-size: clamp(1.2rem, 4vw, 1.5rem); 
+        padding: 0 1.2rem;
+    }
+    .testi-quote-mark { font-size: 6rem; margin-bottom: -1.5rem; }
     .testimonials { padding: 5rem 0; }
     .testi-nav { gap: 1rem; }
     .testi-btn { width: 40px; height: 40px; }
+    
     .gallery-head { flex-direction: column; align-items: flex-start; }
 }
+
 @media (max-width: 600px) {
     .container { width: 92%; }
     .site-header { padding: 1rem 0; }
     .brand-name { font-size: 1.15rem; }
     .brand-tag { font-size: .55rem; }
     .brand-mark { width: 36px; height: 36px; font-size: 1.15rem; }
+    
     .hero-title { font-size: clamp(2.2rem, 9vw, 3rem); }
     .hero-sub { font-size: .92rem; }
+    
     .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 140px; gap: .6rem; }
     .g-wide, .g-tall { grid-column: span 1; grid-row: span 1; }
     .g-item figcaption { opacity: 1; transform: none; padding: 1rem .8rem .8rem; }
     .g-title { font-size: .95rem; }
     .g-meta { font-size: .6rem; }
+    
     .footer-main { grid-template-columns: 1fr; gap: 2.5rem; }
     .footer-brand { grid-column: 1; }
     .footer-bottom-inner { flex-direction: column; align-items: flex-start; }
     .footer-legal { flex-wrap: wrap; }
+    
     .pkg-amount { font-size: 2.8rem; }
     .pkg-card { padding: 2.2rem 1.6rem; }
 }
+
 @media (max-width: 420px) {
     .stats-grid { grid-template-columns: 1fr; }
     .stat::after { display: none !important; }
     .hero-eyebrow { font-size: .62rem; letter-spacing: .25em; }
     .testi-name { font-size: .72rem; }
 }
+
 @media (max-height: 560px) and (orientation: landscape) {
     .hero { height: auto; min-height: 100vh; padding: 120px 0 80px; }
     .hero-scroll { display: none; }
     .hero-card { display: none; }
 }
+
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: .01ms !important;
