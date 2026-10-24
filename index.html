@@ -12,7 +12,53 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- JALUR CSS KAMU -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- TAMBAHAN CSS DARURAT (BIAR HAMBURGER JALAN) -->
+    <style>
+        /* Memaksa menu mobile jadi layar penuh dan ga numpuk */
+        @media (max-width: 1000px) {
+            .nav-menu {
+                display: flex !important;
+                position: fixed !important;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: var(--brown-deep, #1E1613) !important;
+                flex-direction: column; 
+                align-items: center; 
+                justify-content: center;
+                gap: 2rem; 
+                z-index: 9999 !important; 
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+            .nav-menu.active {
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+            .nav-menu .nav-link { 
+                font-size: 1.2rem !important; 
+                display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+            }
+            .menu-toggle { 
+                display: flex !important; 
+                z-index: 10000 !important; 
+                position: relative;
+            }
+            .menu-toggle.open span { background: var(--champagne, #C9B37E) !important; }
+            .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg) !important; }
+            .menu-toggle.open span:nth-child(2) { transform: translateY(-1px) rotate(-45deg) !important; }
+
+            /* Fix Testimoni Kepotong */
+            .testi-quote {
+                font-size: 1.2rem !important; 
+                padding: 0 1.5rem !important;
+                line-height: 1.6 !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -318,7 +364,9 @@
                 </div>
             </div>
         </div>
-              </section>   <!-- ===== CONTACT ===== -->
+    </section>
+
+    <!-- ===== CONTACT ===== -->
     <section id="contact" class="contact">
         <div class="contact-inner">
             <div class="contact-form-wrap">
@@ -355,7 +403,7 @@
                     <li><div class="contact-icon"><i class="fa-solid fa-envelope"></i></div><div><span class="contact-label">Email</span><a href="mailto:hello@rxfatih.id" class="contact-value">hello@rxfatih.id</a></div></li>
                     <li><div class="contact-icon"><i class="fa-regular fa-clock"></i></div><div><span class="contact-label">Jam Operasional</span><span class="contact-value">Senin–Sabtu · 09.00–18.00</span></div></li>
                 </ul>
-                <a href="https://wa.me/628826621362" target="_blank" class="contact-wa">
+                <a href="https://wa.me/6288226621362" target="_blank" class="contact-wa">
                     <i class="fa-brands fa-whatsapp"></i>
                     <div><span class="wa-label">Respon paling cepat</span><span class="wa-cta">Chat via WhatsApp</span></div>
                     <i class="fa-solid fa-arrow-right-long wa-arrow"></i>
@@ -407,9 +455,9 @@
                 <h4>Kunjungi</h4>
                 <ul class="footer-contact">
                     <li>Jl. Pernikahan Indah No. 88<br>Jakarta Selatan 12140</li>
-                    <li><a href="tel:+628826621362">+62 882 6621 362</a></li>
-                    <li><a href="mailto:hello@rxfatih.id">hello@rxfatih.id</a></li>
-                    <li><a href="https://instagram.com/rxfatih.id" target="_blank">@rxfatih.id</a></li>
+                    <li><a href="tel:+6288226621362">+62 882 2662 1362</a></li>
+                    <li><a href="mailto: rxfatih2@gmail.com">rxfatih2@gmail.com</a></li>
+                    <li><a href="https://instagram.com/rx_fatih.id" target="_blank">@rx_fatih</a></li>
                 </ul>
             </div>
         </div>
@@ -424,6 +472,24 @@
         </div>
     </footer>
 
+    <!-- JALUR JS KAMU -->
     <script src="script.js"></script>
+
+    <!-- TAMBAHAN JS DARURAT (BIAR HAMBURGER KLIK) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var menuBtn = document.getElementById('mobile-menu');
+            var navMenu = document.querySelector('.nav-menu');
+            
+            if (menuBtn && navMenu) {
+                menuBtn.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    navMenu.classList.toggle('active');
+                    menuBtn.classList.toggle('open');
+                };
+            }
+        });
+    </script>
 </body>
-                                                  </html>
+                        </html>
