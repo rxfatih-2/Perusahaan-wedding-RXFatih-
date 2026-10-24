@@ -13,36 +13,59 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ---------- 2. MOBILE MENU ---------- */
-    const menuBtn = document.getElementById('mobile-menu');
-    const navMenu = document.querySelector('.nav-menu');
-    if (menuBtn && navMenu) {
-        menuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            menuBtn.classList.toggle('open');
-            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-        });
-        navMenu.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                menuBtn.classList.remove('open');
-                document.body.style.overflow = '';
-            });
-        });
-    }
+const menuBtn = document.getElementById('mobile-menu');
+const navMenu = document.querySelector('.nav-menu');
+if (menuBtn && navMenu) {
+    menuBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = navMenu.classList.toggle('active');
+        menuBtn.classList.toggle('open', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
 
-    /* ---------- 3. SMOOTH SCROLL ---------- */
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return;
-            const target = document.querySelector(targetId);
-            if (!target) return;
-            e.preventDefault();
-            const offset = 70;
-            const pos = target.getBoundingClientRect().top + window.pageYOffset - offset;
-            window.scrollTo({ top: pos, behavior: 'smooth' });
+    // Tutup menu saat klik link (termasuk link ke halaman lain)
+    navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuBtn.classList.remove('open');
+            document.body.style.overflow = '';
         });
     });
+
+    // Tutup menu saat klik di luar area menu
+    document.addEventListener('click', (e) => {
+        if (navMenu.classList.contains('active')
+            && !navMenu.contains(e.target)
+            && !menuBtn.contains(e.target)) {
+            navMenu.classList.remove('active');
+            menuBtn.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Tutup menu saat resize ke desktop
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 1000) {
+            navMenu.classList.remove('active');
+            menuBtn.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    });
+}
+
+/* ---------- 3. SMOOTH SCROLL (hanya untuk anchor di halaman yang sama) ---------- */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        const target = document.querySelector(targetId);
+        if (!target) return;           // ← ini kunci fix: kalau tidak ada, biarkan browser yang urus
+        e.preventDefault();
+        const offset = 70;
+        const pos = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: pos, behavior: 'smooth' });
+    });
+});
 
     /* ---------- 4. SERVICE PREVIEW ---------- */
     const preview = document.getElementById('servicePreview');
