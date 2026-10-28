@@ -754,62 +754,79 @@ a.contact-value:hover { color: var(--champagne); }
 }
 
 @media (max-width: 1000px) {
-    /* --- MOBILE MENU FIX --- */
+    /* --- SIDEBAR MENU STYLE --- */
+    .menu-toggle { 
+        display: flex; 
+        z-index: 10000; /* Tombol X paling atas */
+        position: relative;
+        transition: transform 0.3s;
+    }
+
+    /* Animasi Tombol jadi X */
+    .menu-toggle.open span { background: var(--brown-deep) !important; }
+    .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-toggle.open span:nth-child(2) { transform: translateY(-1px) rotate(-45deg); }
+
+    /* Sidebar Menu (Geser dari Kanan) */
     .nav-menu {
-        display: flex;
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: var(--brown-deep);
+        display: flex !important;
+        position: fixed !important;
+        top: 0;
+        right: -100%; /* Sembunyikan di luar layar kanan */
+        width: 85%;
+        max-width: 350px;
+        height: 100vh;
+        background: var(--cream) !important; /* Background krem */
         flex-direction: column; 
-        align-items: center; 
-        justify-content: center;
-        gap: 2rem; 
-        z-index: 999; /* Biar di atas navbar */
+        align-items: flex-start; 
+        justify-content: flex-start;
+        padding: 6rem 2.5rem 2rem;
+        gap: 1.5rem; 
+        z-index: 9999 !important; 
+        box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+        transition: right 0.4s cubic-bezier(.22,.61,.36,1);
+    }
+
+    /* Saat menu dibuka */
+    .nav-menu.active {
+        right: 0; /* Geser masuk ke layar */
+    }
+
+    /* Warna teks menu di sidebar */
+    .nav-menu .nav-link { 
+        font-size: 1.1rem !important; 
+        display: flex; 
+        flex-direction: column; 
+        align-items: flex-start; 
+        gap: 0.2rem;
+        color: var(--brown-deep) !important; /* Teks coklat gelap */
+        border-bottom: 1px solid rgba(30,22,19,.1);
+        padding-bottom: 1rem;
+        width: 100%;
+    }
+    .nav-menu .nav-link span { 
+        font-size: 0.7rem; 
+        color: var(--champagne); 
+        margin: 0; 
+    }
+
+    /* Overlay Gelap di Belakang Menu */
+    .menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(30,22,19,0.5);
+        backdrop-filter: blur(4px);
+        z-index: 9998;
         opacity: 0;
         visibility: hidden;
-        transition: all 0.4s cubic-bezier(.22,.61,.36,1);
+        transition: all 0.3s;
     }
-    
-    .nav-menu.active {
+    .menu-overlay.active {
         opacity: 1;
         visibility: visible;
     }
 
-    .nav-menu .nav-link { 
-        font-size: 1.1rem; 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .nav-menu .nav-link span {
-        font-size: 0.8rem;
-        margin-right: 0;
-    }
-
-    /* --- TOMBOL X FIX --- */
-    .menu-toggle { 
-        display: flex; 
-        z-index: 1000; /* Harus paling tinggi */
-        position: relative;
-    }
     
-    .menu-toggle.open span {
-        background: var(--champagne);
-    }
-
-    .menu-toggle.open span:nth-child(1) {
-        transform: translateY(7px) rotate(45deg);
-    }
-
-    .menu-toggle.open span:nth-child(2) {
-        transform: translateY(-1px) rotate(-45deg);
-    }
-
-    .nav-cta { display: none; }
-    .hero-card { display: none; }
-    .hero-scroll { display: none; }
     
     /* --- SECTION FIXES --- */
     .section-head { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 3rem; }
