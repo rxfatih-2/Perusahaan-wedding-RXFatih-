@@ -4,39 +4,54 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* ---------- 1. NAVBAR & HAMBURGER MENU (DIJAMIN JALAN) ---------- */
-    const menuBtn = document.getElementById('mobile-menu');
-    const navMenu = document.querySelector('.nav-menu');
-    
-    if (menuBtn && navMenu) {
-        // Buka / Tutup Menu pas tombol di klik
-        menuBtn.onclick = function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const isOpen = navMenu.classList.contains('active');
-            
-            if (isOpen) {
-                navMenu.classList.remove('active');
-                menuBtn.classList.remove('open');
-                document.body.style.overflow = ''; // Balikin scroll
-            } else {
-                navMenu.classList.add('active');
-                menuBtn.classList.add('open');
-                document.body.style.overflow = 'hidden'; // Kunci scroll
+// --- 1. FITUR HAMBURGER MENU (SIDEBAR STYLE) ---
+const menuBtn = document.getElementById('mobileMenu');
+const navMenu = document.getElementById('navMenu');
+
+if (menuBtn && navMenu) {
+    // Buat elemen overlay gelap secara otomatis lewat JS
+    const overlay = document.createElement('div');
+    overlay.className = 'menu-overlay';
+    document.body.appendChild(overlay);
+
+    function toggleMenu() {
+        const isOpen = navMenu.classList.contains('active');
+        
+        if (isOpen) {
+            navMenu.classList.remove('active');
+            menuBtn.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = ''; // Kembalikan scroll
+        } else {
+            navMenu.classList.add('active');
+            menuBtn.classList.add('open');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Kunci scroll
+        }
+    }
+
+    // Klik tombol hamburger
+    menuBtn.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleMenu();
+    };
+
+    // Klik overlay gelap untuk menutup
+    overlay.onclick = function() {
+        toggleMenu();
+    };
+
+    // Tutup menu jika link diklik
+    const navLinks = navMenu.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.onclick = function() {
+            if (navMenu.classList.contains('active')) {
+                toggleMenu();
             }
         };
-
-        // Tutup menu kalau link di dalamnya diklik
-        const navLinks = navMenu.querySelectorAll('a');
-        navLinks.forEach(link => {
-            link.onclick = function() {
-                navMenu.classList.remove('active');
-                menuBtn.classList.remove('open');
-                document.body.style.overflow = '';
-            };
-        });
-    }
+    });
+}
 
     // Navbar Scroll Effect
     const navbar = document.getElementById('navbar');
