@@ -8,11 +8,109 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* CSS SAMA PERSIS DENGAN INDEX.HTML */
+        :root { --clr-bg: #F9F6F0; --clr-dark: #1A1514; --clr-gold: #B89B72; --clr-grey: #888; --font-heading: 'Cormorant Garamond', serif; --font-body: 'Jost', sans-serif; --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--clr-bg); color: var(--clr-dark); font-family: var(--font-body); font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; }
+        li { list-style: none; }
+        h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 600; line-height: 1.1; }
+        em { font-style: italic; color: var(--clr-gold); }
+        .subtitle { font-family: var(--font-body); text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; font-weight: 500; color: var(--clr-gold); margin-bottom: 1rem; display: block; }
+        .title { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+        .mb-4 { margin-bottom: 2rem; }
+        .text-center { text-align: center; }
+        .section-padding { padding: 8rem 2rem; }
+        .bg-light { background-color: #EFECE6; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        
+        .btn-solid { display: inline-block; padding: 1rem 2.5rem; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 500; transition: var(--transition); cursor: pointer; background: var(--clr-dark); color: var(--clr-bg); border: 1px solid var(--clr-dark); }
+        .btn-solid:hover { background: var(--clr-gold); border-color: var(--clr-gold); }
+        .btn-outline { display: inline-block; padding: 1rem 2.5rem; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 500; transition: var(--transition); cursor: pointer; border: 1px solid var(--clr-dark); color: var(--clr-dark); }
+        .btn-outline:hover { background: var(--clr-dark); color: var(--clr-bg); }
+
+        .navbar { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.5rem 2rem; transition: var(--transition); }
+        .navbar.scrolled { background: rgba(249, 246, 240, 0.95); backdrop-filter: blur(10px); padding: 1rem 2rem; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-heading); font-size: 2rem; font-weight: 600; color: var(--clr-dark); letter-spacing: 1px; }
+        .logo span { color: var(--clr-gold); }
+        .navbar.scrolled .logo { color: var(--clr-dark); }
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--clr-dark); position: relative; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px; background: var(--clr-gold); transition: var(--transition); }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a.active { color: var(--clr-gold); }
+        .navbar:not(.scrolled) .logo, .navbar:not(.scrolled) .nav-links a, .navbar:not(.scrolled) .btn-outline { color: var(--clr-bg); border-color: var(--clr-bg); }
+        .navbar:not(.scrolled) .btn-outline:hover { background: var(--clr-bg); color: var(--clr-dark); }
+        
+        .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1002; }
+        .hamburger span { display: block; width: 30px; height: 2px; background: var(--clr-dark); transition: var(--transition); }
+        .navbar:not(.scrolled) .hamburger span { background: var(--clr-bg); }
+        .hamburger.active span { background: var(--clr-dark); }
+        .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+        .mobile-overlay { position: fixed; inset: 0; background: rgba(26,21,20,0.5); backdrop-filter: blur(4px); z-index: 1000; opacity: 0; visibility: hidden; transition: var(--transition); }
+        .mobile-overlay.active { opacity: 1; visibility: visible; }
+        .mobile-menu { position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100vh; background: var(--clr-bg); z-index: 1001; display: flex; flex-direction: column; padding: 2rem; transition: right 0.5s cubic-bezier(0.25, 1, 0.5, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.1); }
+        .mobile-menu.active { right: 0; }
+        .mobile-menu-header { margin-bottom: 3rem; }
+        .mobile-links { display: flex; flex-direction: column; gap: 1.5rem; flex-grow: 1; }
+        .mobile-links a:not(.btn-solid) { font-family: var(--font-heading); font-size: 1.8rem; color: var(--clr-dark); border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 0.5rem; transition: var(--transition); }
+        .mobile-links a:not(.btn-solid):hover { color: var(--clr-gold); padding-left: 10px; }
+        .mobile-menu-footer { margin-top: auto; color: var(--clr-grey); font-size: 0.9rem; }
+
+        .gallery-header { padding: 12rem 2rem 5rem; background: var(--clr-bg); }
+        .gallery-header .title { font-size: 4rem; margin-bottom: 1.5rem; }
+        .gallery-header .desc { color: var(--clr-grey); max-width: 500px; margin: 0 auto; }
+
+        .gallery-section { padding: 0 2rem 8rem; }
+        .gallery-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 300px; gap: 1.5rem; }
+        .gallery-item { position: relative; overflow: hidden; cursor: pointer; background: var(--clr-dark); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+        .gallery-item:hover img { transform: scale(1.08); opacity: 0.8; }
+        .gallery-item.tall { grid-row: span 2; }
+        .gallery-item.wide { grid-column: span 2; }
+
+        .video-wrapper { position: relative; max-width: 900px; margin: 0 auto; aspect-ratio: 16/9; background: var(--clr-dark); cursor: pointer; overflow: hidden; border-radius: 4px; }
+        .video-poster { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: var(--transition); }
+        .video-wrapper:hover .video-poster { opacity: 0.5; }
+        .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background: rgba(255,255,255,0.2); backdrop-filter: blur(5px); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.5rem; border: 1px solid #fff; transition: var(--transition); }
+        .video-wrapper:hover .play-btn { background: var(--clr-gold); border-color: var(--clr-gold); color: var(--clr-dark); transform: translate(-50%, -50%) scale(1.1); }
+        #weddingVideo { width: 100%; height: 100%; object-fit: cover; }
+
+        .lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(26,21,20,0.95); display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: var(--transition); }
+        .lightbox.active { opacity: 1; visibility: visible; }
+        .lightbox img { max-width: 90%; max-height: 90vh; box-shadow: 0 20px 50px rgba(0,0,0,0.5); transform: scale(0.95); transition: var(--transition); }
+        .lightbox.active img { transform: scale(1); }
+        .close-lightbox { position: absolute; top: 30px; right: 40px; color: #fff; font-size: 3rem; cursor: pointer; font-weight: 300; }
+
+        footer { background: var(--clr-dark); color: var(--clr-bg); padding: 3rem 2rem; text-align: center; }
+        .footer-bottom p { color: #666; font-size: 0.9rem; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 1024px) {
+            .nav-links, .navbar .btn-outline { display: none; }
+            .hamburger { display: flex; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .section-padding { padding: 5rem 1.5rem; }
+            .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 250px; }
+            .gallery-item.tall, .gallery-item.wide { grid-row: auto; grid-column: auto; }
+            .gallery-header .title { font-size: 3rem; }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- NAVBAR (Sama seperti index) -->
     <header class="navbar scrolled">
         <div class="nav-container">
             <a href="index.html" class="logo">Rxfatih<span>.</span></a>
@@ -29,7 +127,6 @@
         </div>
     </header>
 
-    <!-- MOBILE MENU -->
     <div class="mobile-overlay" id="mobileOverlay"></div>
     <nav class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu-header">
@@ -48,7 +145,6 @@
         </div>
     </nav>
 
-    <!-- GALLERY HEADER -->
     <section class="gallery-header">
         <div class="container text-center reveal">
             <p class="subtitle">Portofolio Kami</p>
@@ -57,87 +153,141 @@
         </div>
     </section>
 
-    <!-- GALLERY GRID (10 FOTO) -->
     <section class="gallery-section">
         <div class="gallery-grid">
-            <!-- Item 1 -->
             <div class="gallery-item tall reveal" data-src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop">
                 <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=800&auto=format&fit=crop" alt="Wedding Setup">
             </div>
-            <!-- Item 2 -->
             <div class="gallery-item wide reveal" data-src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop">
                 <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800&auto=format&fit=crop" alt="The Dress">
             </div>
-            <!-- Item 3 -->
             <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop">
                 <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop" alt="Rings">
             </div>
-            <!-- Item 4 -->
             <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=2070&auto=format&fit=crop">
                 <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=800&auto=format&fit=crop" alt="Table Setting">
             </div>
-            <!-- Item 5 -->
             <div class="gallery-item tall reveal" data-src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop">
                 <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop" alt="Couple">
             </div>
-            <!-- Item 6 -->
             <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?q=80&w=1974&auto=format&fit=crop">
                 <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?q=80&w=800&auto=format&fit=crop" alt="Bouquet">
             </div>
-            <!-- Item 7 -->
             <div class="gallery-item wide reveal" data-src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?q=80&w=2070&auto=format&fit=crop">
                 <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?q=80&w=800&auto=format&fit=crop" alt="Decor">
             </div>
-            <!-- Item 8 -->
             <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop">
                 <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=800&auto=format&fit=crop" alt="Kiss">
             </div>
-            <!-- Item 9 -->
             <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop">
                 <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop" alt="Ceremony">
             </div>
-            <!-- Item 10 -->
             <div class="gallery-item tall reveal" data-src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=2070&auto=format&fit=crop">
                 <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=800&auto=format&fit=crop" alt="Party">
             </div>
         </div>
     </section>
 
-    <!-- VIDEO SECTION (1 Video Elegan) -->
-    <section class="video-section section-padding bg-light">
+    <section class="section-padding bg-light">
         <div class="container text-center reveal">
             <p class="subtitle">Cinematic Film</p>
             <h2 class="title mb-4">The <em>Highlight</em></h2>
-            
             <div class="video-wrapper" id="videoContainer">
-                <!-- Video Placeholder & Play Button -->
                 <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" alt="Video Thumbnail" class="video-poster">
-                <div class="play-btn">
-                    <i class="fa-solid fa-play"></i>
-                </div>
-                <!-- Video Asli (Tersembunyi) -->
+                <div class="play-btn"><i class="fa-solid fa-play"></i></div>
                 <video id="weddingVideo" controls style="display: none;">
-                    <!-- Gunakan link video mp4 Anda di sini -->
                     <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                 </video>
             </div>
         </div>
     </section>
 
-    <!-- LIGHTBOX UNTUK FOTO -->
     <div class="lightbox" id="lightbox">
         <span class="close-lightbox" id="closeLightbox">&times;</span>
         <img src="" alt="Zoomed Image" id="lightboxImg">
     </div>
 
-    <!-- FOOTER -->
     <footer>
-        <div class="container footer-bottom" style="border: none; padding-top: 0;">
-            <p>&copy; 2026 Rxfatih Atelier. All Rights Reserved.</p>
-            <a href="index.html" style="color: var(--clr-gold); text-decoration: none;">Kembali ke Beranda</a>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Rxfatih Atelier. All Rights Reserved. | <a href="index.html" style="color: var(--clr-gold);">Kembali ke Beranda</a></p>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hamburger Menu
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileOverlay = document.getElementById('mobileOverlay');
+
+            if (hamburger && mobileMenu) {
+                function toggleMenu() {
+                    hamburger.classList.toggle('active');
+                    mobileMenu.classList.toggle('active');
+                    mobileOverlay.classList.toggle('active');
+                    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+                }
+                hamburger.addEventListener('click', toggleMenu);
+                mobileOverlay.addEventListener('click', toggleMenu);
+            }
+
+            // Reveal
+            const reveals = document.querySelectorAll('.reveal');
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+            reveals.forEach(reveal => revealOnScroll.observe(reveal));
+
+            // Lightbox
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const closeLightbox = document.getElementById('closeLightbox');
+
+            if (lightbox && galleryItems.length > 0) {
+                galleryItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        const src = item.getAttribute('data-src');
+                        if (src) {
+                            lightboxImg.src = src;
+                            lightbox.classList.add('active');
+                            document.body.style.overflow = 'hidden';
+                        }
+                    });
+                });
+
+                closeLightbox.addEventListener('click', () => {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+                lightbox.addEventListener('click', (e) => {
+                    if (e.target === lightbox) {
+                        lightbox.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+
+            // Video Play Logic
+            const videoContainer = document.getElementById('videoContainer');
+            const weddingVideo = document.getElementById('weddingVideo');
+
+            if (videoContainer && weddingVideo) {
+                videoContainer.addEventListener('click', function() {
+                    const poster = this.querySelector('.video-poster');
+                    const playBtn = this.querySelector('.play-btn');
+                    if (poster) poster.style.display = 'none';
+                    if (playBtn) playBtn.style.display = 'none';
+                    weddingVideo.style.display = 'block';
+                    weddingVideo.play();
+                });
+            }
+        });
+    </script>
 </body>
 </html>
