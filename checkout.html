@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfirmasi Pesanan | Rxfatih Atelier</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root { --clr-bg: #F9F6F0; --clr-dark: #1A1514; --clr-gold: #B89B72; --clr-grey: #888; --font-heading: 'Cormorant Garamond', serif; --font-body: 'Jost', sans-serif; --transition: all 0.4s ease; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--clr-bg); color: var(--clr-dark); font-family: var(--font-body); font-weight: 300; line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+        a { text-decoration: none; color: inherit; }
+        h1, h2, h3 { font-family: var(--font-heading); font-weight: 600; }
+        
+        .nav-simple { padding: 2rem; text-align: center; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .logo { font-family: var(--font-heading); font-size: 2rem; font-weight: 600; letter-spacing: 1px; }
+        .logo span { color: var(--clr-gold); }
+
+        .checkout-container { flex-grow: 1; max-width: 1000px; margin: 4rem auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+        
+        /* Kiri: Ringkasan Paket */
+        .order-summary { background: #fff; padding: 3rem; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+        .order-summary h2 { font-size: 2rem; margin-bottom: 1.5rem; border-bottom: 1px solid #eee; padding-bottom: 1rem; }
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 1.1rem; }
+        .summary-row.total { font-weight: 500; font-size: 1.3rem; color: var(--clr-gold); border-top: 1px solid #eee; padding-top: 1.5rem; margin-top: 1.5rem; }
+        
+        /* Kanan: Form Data */
+        .checkout-form { display: flex; flex-direction: column; gap: 1.5rem; }
+        .checkout-form h3 { font-size: 1.8rem; margin-bottom: 1rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .form-group label { font-size: 0.9rem; font-weight: 500; color: var(--clr-dark); text-transform: uppercase; letter-spacing: 1px; }
+        .form-group input, .form-group textarea, .form-group select { padding: 1rem; border: 1px solid #ddd; background: #fff; font-family: var(--font-body); font-size: 1rem; outline: none; transition: var(--transition); }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--clr-gold); }
+        .form-group textarea { resize: vertical; min-height: 100px; }
+
+        .btn-wa { background: #25D366; color: white; padding: 1.2rem; border: none; font-family: var(--font-body); font-size: 1rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: var(--transition); display: flex; justify-content: center; align-items: center; gap: 10px; width: 100%; margin-top: 1rem; }
+        .btn-wa:hover { background: #1da851; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); }
+
+        .back-link { display: block; margin-top: 1.5rem; text-align: center; color: var(--clr-grey); font-size: 0.9rem; }
+        .back-link:hover { color: var(--clr-gold); }
+
+        @media (max-width: 768px) {
+            .checkout-container { grid-template-columns: 1fr; gap: 2rem; margin: 2rem auto; }
+            .order-summary { order: 2; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-simple">
+        <a href="index.html" class="logo">Rxfatih<span>.</span></a>
+    </div>
+
+    <div class="checkout-container">
+        
+        <!-- RINGKASAN PESANAN (KIRI) -->
+        <div class="order-summary">
+            <h2>Ringkasan Pesanan</h2>
+            <div class="summary-row">
+                <span>Paket Dipilih</span>
+                <span id="summary-package-name">Gold Package</span>
+            </div>
+            <div class="summary-row">
+                <span>Fasilitas</span>
+                <span style="color: var(--clr-grey); font-size: 0.9rem; text-align: right;">Sesuai Detail Paket</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total Estimasi</span>
+                <span id="summary-package-price">IDR 65M</span>
+            </div>
+            <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--clr-grey); line-height: 1.5;">*Harga belum termasuk biaya transportasi luar kota. Pembayaran DP akan didiskusikan melalui WhatsApp.</p>
+        </div>
+
+        <!-- FORMULIR (KANAN) -->
+        <form class="checkout-form" id="waForm">
+            <h3>Lengkapi Data Anda</h3>
+            
+            <div class="form-group">
+                <label>Nama Lengkap</label>
+                <input type="text" id="nama" placeholder="Masukkan nama Anda" required>
+            </div>
+
+            <div class="form-group">
+                <label>Nomor WhatsApp</label>
+                <input type="tel" id="whatsapp" placeholder="Contoh: 08123456789" required>
+            </div>
+
+            <div class="form-group">
+                <label>Tanggal Acara (Estimasi)</label>
+                <input type="date" id="tanggal" required>
+            </div>
+
+            <div class="form-group">
+                <label>Catatan Tambahan (Opsional)</label>
+                <textarea id="catatan" placeholder="Contoh: Butuh dekorasi tema rustik, catering tambahan, dll."></textarea>
+            </div>
+
+            <button type="submit" class="btn-wa">
+                <i class="fa-brands fa-whatsapp"></i> Lanjut ke WhatsApp
+            </button>
+
+            <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda</a>
+        </form>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Ambil parameter dari URL (contoh: checkout.html?paket=gold)
+            const urlParams = new URLSearchParams(window.location.search);
+            let paket = urlParams.get('paket');
+            
+            // Elemen untuk menampilkan nama paket dan harga
+            const pkgNameEl = document.getElementById('summary-package-name');
+            const pkgPriceEl = document.getElementById('summary-package-price');
+            
+            let hargaFinal = "";
+
+            // 2. Logika penentuan paket berdasarkan URL
+            if (paket === 'silver') {
+                pkgNameEl.textContent = 'Silver Package';
+                pkgPriceEl.textContent = 'IDR 35 Juta';
+                hargaFinal = 'Silver (IDR 35 Juta)';
+            } else if (paket === 'platinum') {
+                pkgNameEl.textContent = 'Platinum Package';
+                pkgPriceEl.textContent = 'IDR 120 Juta';
+                hargaFinal = 'Platinum (IDR 120 Juta)';
+            } else {
+                // Default jika tidak ada parameter atau memilih gold
+                paket = 'gold';
+                pkgNameEl.textContent = 'Gold Package';
+                pkgPriceEl.textContent = 'IDR 65 Juta';
+                hargaFinal = 'Gold (IDR 65 Juta)';
+            }
+
+            // 3. Logika Kirim ke WhatsApp
+            const form = document.getElementById('waForm');
+            form.addEventListener('submit', (e) => {
+                e.preventDefault(); // Mencegah form reload halaman
+                
+                const nama = document.getElementById('nama').value;
+                const whatsapp = document.getElementById('whatsapp').value;
+                const tanggal = document.getElementById('tanggal').value;
+                const catatan = document.getElementById('catatan').value || '-';
+
+                // Nomor WA tujuan (Ganti dengan nomor kamu)
+                const noTujuan = '628826621362'; 
+
+                // Format pesan WhatsApp
+                const pesan = `Halo Rxfatih Atelier, saya ingin melakukan reservasi pernikahan.%0A%0A*Detail Pemesan:*%0ANama: ${nama}%0ANo. WA: ${whatsapp}%0A%0A*Detail Pesanan:*%0APaket: ${hargaFinal}%0ATanggal Acara: ${tanggal}%0ACatatan: ${catatan}%0A%0AMohon info selanjutnya untuk proses pembayaran dan ketersediaan jadwal. Terima kasih.`;
+
+                // Buka tab baru ke WhatsApp
+                window.open(`https://wa.me/${noTujuan}?text=${pesan}`, '_blank');
+            });
+        });
+    </script>
+</body>
+</html>
