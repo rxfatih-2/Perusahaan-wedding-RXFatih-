@@ -3,163 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paket Gold — Rxfatih Atelier</title>
-    <meta name="description" content="Paket Gold Rxfatih Atelier: tenda roder premium, catering 500 pax, sound & lighting profesional, dokumentasi cinematic.">
+    <title>Galeri | Rxfatih Atelier</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header class="site-header scrolled" id="navbar">
-        <div class="header-inner">
-            <a href="index.html" class="brand">
-                <span class="brand-mark">R</span>
-                <span class="brand-text">
-                    <span class="brand-name">Rxfatih</span>
-                    <span class="brand-tag">Atelier · Est. 2014</span>
-                </span>
-            </a>
-            <nav class="nav">
-                <!-- TAMBAHAN ID="navMenu" -->
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="index.html#services" class="nav-link"><span>01</span> Layanan</a></li>
-                    <li><a href="index.html#packages" class="nav-link"><span>02</span> Paket</a></li>
-                    <li><a href="gallery.html" class="nav-link"><span>03</span> Galeri</a></li>
-                    <li><a href="index.html#features" class="nav-link"><span>04</span> Keunggulan</a></li>
-                </ul>
-                <a href="index.html#contact" class="nav-cta">Reservasi <i class="fa-solid fa-arrow-right-long"></i></a>
+    <!-- NAVBAR (Sama seperti index) -->
+    <header class="navbar scrolled">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Rxfatih<span>.</span></a>
+            <nav class="nav-links">
+                <a href="index.html">Beranda</a>
+                <a href="index.html#services">Layanan</a>
+                <a href="index.html#packages">Paket</a>
+                <a href="gallery.html" class="active">Galeri</a>
             </nav>
-            <!-- UBAH ID JADI id="mobileMenu" -->
-            <button class="menu-toggle" id="mobileMenu" aria-label="Menu">
-                <span></span><span></span>
+            <a href="index.html#contact" class="btn-outline">Reservasi</a>
+            <button class="hamburger" id="hamburger">
+                <span></span><span></span><span></span>
             </button>
         </div>
     </header>
 
-    <main class="pkg-detail">
-        <div class="container">
-
-            <div class="pkg-detail-back">
-                <a href="index.html#packages" class="gallery-link">
-                    <i class="fa-solid fa-arrow-left-long"></i> Kembali ke Paket
-                </a>
-            </div>
-
-            <div class="pkg-detail-grid">
-
-                <div class="pkg-detail-media">
-                    <img src="images/hero-bg.jpg" alt="Paket Gold Rxfatih Atelier">
-                </div>
-
-                <div>
-                    <div class="pkg-detail-head">
-                        <p class="eyebrow"><span class="dot"></span> Paket II · Favorit</p>
-                        <h1>Gold <em>Package</em></h1>
-                        <p class="pkg-detail-desc">
-                            Pilihan paling seimbang untuk pernikahan 500 tamu —
-                            tenda roder dengan dekorasi premium, buffet lengkap,
-                            sound &amp; lighting profesional, dan dokumentasi
-                            cinematic sepanjang hari.
-                        </p>
-                    </div>
-
-                    <div class="pkg-detail-price">
-                        <span class="currency">Rp</span>
-                        <span class="amount">45</span>
-                        <span class="unit">Juta</span>
-                    </div>
-
-                    <ul class="pkg-detail-features">
-                        <li><i class="fa-solid fa-check"></i> Tenda roder ukuran 15×20 m + dekorasi premium floral &amp; lighting</li>
-                        <li><i class="fa-solid fa-check"></i> Catering 500 pax (buffet 30 menu + 3 live cooking station)</li>
-                        <li><i class="fa-solid fa-check"></i> Sound system line array + MC + lighting moving head</li>
-                        <li><i class="fa-solid fa-check"></i> Fotografi &amp; video cinematic full day (2 fotografer, 2 videografer)</li>
-                        <li><i class="fa-solid fa-check"></i> Album premium 20 lembar + same day edit video</li>
-                        <li><i class="fa-solid fa-check"></i> Free konsultasi wedding organizer (2× pertemuan)</li>
-                    </ul>
-
-                    <div class="pkg-detail-actions">
-                        <a href="https://wa.me/628826621362?text=Halo%20Rxfatih%2C%20saya%20tertarik%20Paket%20Gold" target="_blank" class="btn btn-gold">
-                            <i class="fa-brands fa-whatsapp"></i> Pesan Paket Gold
-                        </a>
-                        <a href="index.html#contact" class="btn btn-outline-dark">
-                            Konsultasi Dulu
-                        </a>
-                    </div>
-
-                    <div class="pkg-detail-note">
-                        <strong>Catatan:</strong> Harga belum termasuk biaya transportasi
-                        luar kota dan akomodasi tim. Semua paket dapat disesuaikan
-                        — kami senang merancang bersama Anda.
-                    </div>
-                </div>
-            </div>
-
-            <div class="pkg-detail-other">
-                <h2>Paket <em>lainnya</em>.</h2>
-                <div class="package-grid">
-
-                    <article class="pkg-card">
-                        <header class="pkg-head">
-                            <span class="pkg-index">I</span>
-                            <h3 class="pkg-name">Silver</h3>
-                            <p class="pkg-for">300 tamu · intimate</p>
-                        </header>
-                        <div class="pkg-price">
-                            <span class="pkg-currency">Rp</span>
-                            <span class="pkg-amount">25</span>
-                            <span class="pkg-unit">Juta</span>
-                        </div>
-                        <a href="package-detail.html" class="pkg-btn">Lihat Silver <i class="fa-solid fa-arrow-right-long"></i></a>
-                    </article>
-
-                    <article class="pkg-card featured">
-                        <span class="pkg-badge">Anda di sini</span>
-                        <header class="pkg-head">
-                            <span class="pkg-index">II</span>
-                            <h3 class="pkg-name">Gold</h3>
-                            <p class="pkg-for">500 tamu · favorit</p>
-                        </header>
-                        <div class="pkg-price">
-                            <span class="pkg-currency">Rp</span>
-                            <span class="pkg-amount">45</span>
-                            <span class="pkg-unit">Juta</span>
-                        </div>
-                        <a href="#" class="pkg-btn solid" onclick="return false;">Sedang Dilihat <i class="fa-solid fa-eye"></i></a>
-                    </article>
-
-                    <article class="pkg-card">
-                        <header class="pkg-head">
-                            <span class="pkg-index">III</span>
-                            <h3 class="pkg-name">Platinum</h3>
-                            <p class="pkg-for">1000 tamu · penuh</p>
-                        </header>
-                        <div class="pkg-price">
-                            <span class="pkg-currency">Rp</span>
-                            <span class="pkg-amount">75</span>
-                            <span class="pkg-unit">Juta</span>
-                        </div>
-                        <a href="package-detail.html" class="pkg-btn">Lihat Platinum <i class="fa-solid fa-arrow-right-long"></i></a>
-                    </article>
-
-                </div>
-            </div>
-
+    <!-- MOBILE MENU -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <nav class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span class="logo">Rxfatih<span>.</span></span>
         </div>
-    </main>
+        <div class="mobile-links">
+            <a href="index.html">Beranda</a>
+            <a href="index.html#services">Layanan</a>
+            <a href="index.html#packages">Paket</a>
+            <a href="gallery.html">Galeri</a>
+            <a href="index.html#contact" class="btn-solid">Reservasi Sekarang</a>
+        </div>
+        <div class="mobile-menu-footer">
+            <p>Jakarta, Indonesia</p>
+            <p>hello@rxfatih.com</p>
+        </div>
+    </nav>
 
-    <footer class="footer">
-        <div class="footer-bottom">
-            <div class="container footer-bottom-inner">
-                <p>&copy; 2026 Rxfatih Atelier. Semua hak dilindungi.</p>
-                <ul class="footer-legal">
-                    <li><a href="index.html">Beranda</a></li>
-                    <li><a href="index.html#contact">Kontak</a></li>
-                </ul>
+    <!-- GALLERY HEADER -->
+    <section class="gallery-header">
+        <div class="container text-center reveal">
+            <p class="subtitle">Portofolio Kami</p>
+            <h1 class="title">Momen yang <em>Abadi</em></h1>
+            <p class="desc">Kumpulan karya terbaik yang telah kami rancang dengan sepenuh hati.</p>
+        </div>
+    </section>
+
+    <!-- GALLERY GRID (10 FOTO) -->
+    <section class="gallery-section">
+        <div class="gallery-grid">
+            <!-- Item 1 -->
+            <div class="gallery-item tall reveal" data-src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop">
+                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=800&auto=format&fit=crop" alt="Wedding Setup">
             </div>
+            <!-- Item 2 -->
+            <div class="gallery-item wide reveal" data-src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop">
+                <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800&auto=format&fit=crop" alt="The Dress">
+            </div>
+            <!-- Item 3 -->
+            <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop">
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=800&auto=format&fit=crop" alt="Rings">
+            </div>
+            <!-- Item 4 -->
+            <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=2070&auto=format&fit=crop">
+                <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=800&auto=format&fit=crop" alt="Table Setting">
+            </div>
+            <!-- Item 5 -->
+            <div class="gallery-item tall reveal" data-src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop">
+                <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop" alt="Couple">
+            </div>
+            <!-- Item 6 -->
+            <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?q=80&w=1974&auto=format&fit=crop">
+                <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?q=80&w=800&auto=format&fit=crop" alt="Bouquet">
+            </div>
+            <!-- Item 7 -->
+            <div class="gallery-item wide reveal" data-src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?q=80&w=2070&auto=format&fit=crop">
+                <img src="https://images.unsplash.com/photo-1532712938310-34cb3982ef74?q=80&w=800&auto=format&fit=crop" alt="Decor">
+            </div>
+            <!-- Item 8 -->
+            <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=2070&auto=format&fit=crop">
+                <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=800&auto=format&fit=crop" alt="Kiss">
+            </div>
+            <!-- Item 9 -->
+            <div class="gallery-item reveal" data-src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop">
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop" alt="Ceremony">
+            </div>
+            <!-- Item 10 -->
+            <div class="gallery-item tall reveal" data-src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=2070&auto=format&fit=crop">
+                <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=800&auto=format&fit=crop" alt="Party">
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEO SECTION (1 Video Elegan) -->
+    <section class="video-section section-padding bg-light">
+        <div class="container text-center reveal">
+            <p class="subtitle">Cinematic Film</p>
+            <h2 class="title mb-4">The <em>Highlight</em></h2>
+            
+            <div class="video-wrapper" id="videoContainer">
+                <!-- Video Placeholder & Play Button -->
+                <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" alt="Video Thumbnail" class="video-poster">
+                <div class="play-btn">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+                <!-- Video Asli (Tersembunyi) -->
+                <video id="weddingVideo" controls style="display: none;">
+                    <!-- Gunakan link video mp4 Anda di sini -->
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX UNTUK FOTO -->
+    <div class="lightbox" id="lightbox">
+        <span class="close-lightbox" id="closeLightbox">&times;</span>
+        <img src="" alt="Zoomed Image" id="lightboxImg">
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-bottom" style="border: none; padding-top: 0;">
+            <p>&copy; 2026 Rxfatih Atelier. All Rights Reserved.</p>
+            <a href="index.html" style="color: var(--clr-gold); text-decoration: none;">Kembali ke Beranda</a>
         </div>
     </footer>
 
