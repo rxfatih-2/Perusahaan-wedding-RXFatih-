@@ -3,6 +3,10 @@
 // Ganti nomor WhatsApp tujuan dengan format kode negara tanpa tanda + (contoh: 6281234567890)
 const WHATSAPP_NUMBER = '6288226621362';
 
+// Opsional: isi nama/path file MP3 spesifik Anda di sini (contoh: 'lagu-nikah.mp3' atau 'assets/music.mp3').
+// Biarkan kosong ('') agar sistem otomatis mencari file di assets/music.mp3, music.mp3, musik.mp3, audio.mp3, atau backsound.mp3.
+const CUSTOM_AUDIO_SRC = '';
+
 const THEME_CATALOG = {
   sunda: {
     category: 'Warisan Budaya • Jawa Barat',
@@ -155,74 +159,108 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Ambient audio controller (uses local assets/music.mp3 with Web Audio gentle chord fallback)
+  // Auto-start background music on first click, tap, or scroll + manual toggle control
   const audioToggle = document.getElementById('audio-toggle');
+  const audioLabel = document.getElementById('audio-label');
   const bgMusic = document.getElementById('bg-music');
-  let audioCtx = null;
-  let fallbackTimer = null;
   let isPlaying = false;
+  let userPausedManually = false;
+  let allSourcesFailed = false;
 
-  function startGentleFallbackTone() {
-    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContextClass) return;
-    if (!audioCtx) {
-      audioCtx = new AudioContextClass();
+  if (bgMusic) {
+    bgMusic.volume = 0.75;
+    if (CUSTOM_AUDIO_SRC.trim()) {
+      bgMusic.src = CUSTOM_AUDIO_SRC.trim();
+      bgMusic.load();
+    } else {
+      const sources = bgMusic.querySelectorAll('source');
+      const lastSource = sources[sources.length - 1];
+      if (lastSource) {
+        lastSource.addEventListener('error', () => {
+          allSourcesFailed = true;
+        });
+      }
     }
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-    const notes = [261.63, 329.63, 392.0, 493.88];
-    let step = 0;
 
-    const playNote = () => {
-      if (!isPlaying || !audioCtx) return;
-      const now = audioCtx.currentTime;
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(notes[step % notes.length], now);
-      gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.exponentialRampToValueAtTime(0.025, now + 0.4);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.4);
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start(now);
-      osc.stop(now + 2.5);
-      step += 1;
-    };
+    bgMusic.addEventListener('play', () => {
+      isPlaying = true;
+      updateAudioUI(true);
+      detachAutoStartListeners();
+    });
 
-    playNote();
-    fallbackTimer = window.setInterval(playNote, 2600);
+    bgMusic.addEventListener('pause', () => {
+      isPlaying = false;
+      updateAudioUI(false);
+    });
   }
 
-  function stopAudio() {
-    isPlaying = false;
-    if (bgMusic) {
-      bgMusic.pause();
-    }
-    if (fallbackTimer) {
-      clearInterval(fallbackTimer);
-      fallbackTimer = null;
-    }
+  function updateAudioUI(playing) {
     if (audioToggle) {
-      audioToggle.setAttribute('aria-pressed', 'false');
+      audioToggle.setAttribute('aria-pressed', String(playing));
+    }
+    if (audioLabel) {
+      audioLabel.textContent = playing ? 'Musik Aktif' : 'Putar Musik';
     }
   }
+
+  function playBackgroundMusic() {
+    if (!bgMusic || isPlaying || allSourcesFailed) return;
+    const playPromise = bgMusic.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          isPlaying = true;
+          updateAudioUI(true);
+          detachAutoStartListeners();
+        })
+        .catch(() => {
+          // Browser membutuhkan interaksi sentuh/klik eksplisit sebelum mengizinkan audio;
+          // listener tetap aktif sampai pengguna melakukan tap atau klik.
+        });
+    }
+  }
+
+  function pauseBackgroundMusic() {
+    if (!bgMusic) return;
+    bgMusic.pause();
+    isPlaying = false;
+    updateAudioUI(false);
+  }
+
+  function handleFirstInteraction(event) {
+    if (userPausedManually || isPlaying) return;
+    if (audioToggle && event.target && audioToggle.contains(event.target)) {
+      return;
+    }
+    playBackgroundMusic();
+  }
+
+  const autoStartEvents = ['click', 'touchstart', 'pointerdown', 'scroll', 'wheel', 'keydown'];
+
+  function attachAutoStartListeners() {
+    autoStartEvents.forEach((evtName) => {
+      window.addEventListener(evtName, handleFirstInteraction, { passive: true });
+    });
+  }
+
+  function detachAutoStartListeners() {
+    autoStartEvents.forEach((evtName) => {
+      window.removeEventListener(evtName, handleFirstInteraction);
+    });
+  }
+
+  attachAutoStartListeners();
 
   if (audioToggle) {
-    audioToggle.addEventListener('click', () => {
+    audioToggle.addEventListener('click', (event) => {
+      event.stopPropagation();
       if (isPlaying) {
-        stopAudio();
-        return;
-      }
-      isPlaying = true;
-      audioToggle.setAttribute('aria-pressed', 'true');
-      if (bgMusic) {
-        bgMusic.play().catch(() => {
-          startGentleFallbackTone();
-        });
+        userPausedManually = true;
+        detachAutoStartListeners();
+        pauseBackgroundMusic();
       } else {
-        startGentleFallbackTone();
+        userPausedManually = false;
+        playBackgroundMusic();
       }
     });
   }
