@@ -1,359 +1,503 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rxfatih Atelier | Luxury Wedding Organizer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* CSS UTAMA */
-        :root { --clr-bg: #F9F6F0; --clr-dark: #1A1514; --clr-gold: #B89B72; --clr-grey: #888; --font-heading: 'Cormorant Garamond', serif; --font-body: 'Jost', sans-serif; --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { background-color: var(--clr-bg); color: var(--clr-dark); font-family: var(--font-body); font-weight: 300; line-height: 1.6; overflow-x: hidden; }
-        img { max-width: 100%; display: block; }
-        a { text-decoration: none; color: inherit; }
-        li { list-style: none; }
-        h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 600; line-height: 1.1; }
-        em { font-style: italic; color: var(--clr-gold); }
-        .subtitle { font-family: var(--font-body); text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; font-weight: 500; color: var(--clr-gold); margin-bottom: 1rem; display: block; }
-        .title { font-size: clamp(2.5rem, 5vw, 4.5rem); }
-        .mb-4 { margin-bottom: 2rem; }
-        .mt-4 { margin-top: 2rem; }
-        .text-center { text-align: center; }
-        .section-padding { padding: 8rem 2rem; }
-        .bg-light { background-color: #EFECE6; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .section-header { margin-bottom: 5rem; max-width: 600px; }
-        .section-header .number { font-family: var(--font-heading); font-size: 1.5rem; color: var(--clr-gold); font-style: italic; }
-        .section-header h2 { font-size: 3rem; margin: 1rem 0; }
-        .section-header p { color: var(--clr-grey); font-size: 1.1rem; }
-
-        .btn-solid, .btn-outline, .btn-outline-dark { display: inline-block; padding: 1rem 2.5rem; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; font-weight: 500; transition: var(--transition); cursor: pointer; }
-        .btn-solid { background: var(--clr-dark); color: var(--clr-bg); border: 1px solid var(--clr-dark); }
-        .btn-solid:hover { background: var(--clr-gold); border-color: var(--clr-gold); }
-        .btn-outline { border: 1px solid var(--clr-dark); color: var(--clr-dark); }
-        .btn-outline:hover { background: var(--clr-dark); color: var(--clr-bg); }
-        .btn-outline-dark { border: 1px solid var(--clr-gold); color: var(--clr-gold); text-align: center; }
-        .btn-outline-dark:hover { background: var(--clr-gold); color: var(--clr-bg); }
-
-        .preloader { position: fixed; inset: 0; background: var(--clr-bg); z-index: 9999; display: flex; align-items: center; justify-content: center; transition: opacity 0.6s ease; }
-        .preloader-text { font-family: var(--font-heading); font-size: 3rem; color: var(--clr-gold); animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-
-        .navbar { position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.5rem 2rem; transition: var(--transition); }
-        .navbar.scrolled { background: rgba(249, 246, 240, 0.95); backdrop-filter: blur(10px); padding: 1rem 2rem; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
-        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: var(--font-heading); font-size: 2rem; font-weight: 600; color: var(--clr-dark); letter-spacing: 1px; }
-        .logo span { color: var(--clr-gold); }
-        .navbar.scrolled .logo { color: var(--clr-dark); }
-        .nav-links { display: flex; gap: 2.5rem; }
-        .nav-links a { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--clr-dark); position: relative; }
-        .nav-links a::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px; background: var(--clr-gold); transition: var(--transition); }
-        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
-        .navbar:not(.scrolled) .logo, .navbar:not(.scrolled) .nav-links a, .navbar:not(.scrolled) .btn-outline { color: var(--clr-bg); border-color: var(--clr-bg); }
-        .navbar:not(.scrolled) .btn-outline:hover { background: var(--clr-bg); color: var(--clr-dark); }
-
-        .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 6px; z-index: 1002; }
-        .hamburger span { display: block; width: 30px; height: 2px; background: var(--clr-dark); transition: var(--transition); }
-        .navbar:not(.scrolled) .hamburger span { background: var(--clr-bg); }
-        .hamburger.active span { background: var(--clr-dark); }
-        .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-        .mobile-overlay { position: fixed; inset: 0; background: rgba(26,21,20,0.5); backdrop-filter: blur(4px); z-index: 1000; opacity: 0; visibility: hidden; transition: var(--transition); }
-        .mobile-overlay.active { opacity: 1; visibility: visible; }
-        .mobile-menu { position: fixed; top: 0; right: -100%; width: 100%; max-width: 400px; height: 100vh; background: var(--clr-bg); z-index: 1001; display: flex; flex-direction: column; padding: 2rem; transition: right 0.5s cubic-bezier(0.25, 1, 0.5, 1); box-shadow: -10px 0 30px rgba(0,0,0,0.1); }
-        .mobile-menu.active { right: 0; }
-        .mobile-menu-header { margin-bottom: 3rem; }
-        .mobile-links { display: flex; flex-direction: column; gap: 1.5rem; flex-grow: 1; }
-        .mobile-links a:not(.btn-solid) { font-family: var(--font-heading); font-size: 1.8rem; color: var(--clr-dark); border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 0.5rem; transition: var(--transition); }
-        .mobile-links a:not(.btn-solid):hover { color: var(--clr-gold); padding-left: 10px; }
-        .mobile-menu-footer { margin-top: auto; color: var(--clr-grey); font-size: 0.9rem; }
-
-        .hero { position: relative; height: 100vh; min-height: 700px; display: flex; align-items: center; padding: 0 5%; }
-        .hero-bg { position: absolute; inset: 0; z-index: -1; }
-        .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
-        .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(26,21,20,0.8) 0%, rgba(26,21,20,0.2) 100%); }
-        .hero-content { max-width: 800px; color: var(--clr-bg); }
-        .hero-content .title { font-size: clamp(3rem, 6vw, 6rem); margin-bottom: 2rem; }
-
-        .marquee { background: var(--clr-dark); color: var(--clr-gold); padding: 1.5rem 0; overflow: hidden; white-space: nowrap; }
-        .marquee-content { display: inline-block; animation: marquee 20s linear infinite; font-family: var(--font-heading); font-size: 1.5rem; font-style: italic; }
-        .marquee-content span { margin: 0 1.5rem; }
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; }
-        .service-item { padding: 3rem 2rem; background: #fff; border: 1px solid rgba(0,0,0,0.05); transition: var(--transition); }
-        .service-item:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
-        .service-item i { font-size: 2.5rem; color: var(--clr-gold); margin-bottom: 1.5rem; }
-        .service-item h3 { font-size: 1.5rem; margin-bottom: 1rem; }
-        .service-item p { color: var(--clr-grey); }
-
-        .packages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; align-items: center; }
-        .package-card { background: #fff; padding: 4rem 3rem; border-radius: 2px; border: 1px solid rgba(0,0,0,0.05); position: relative; transition: var(--transition); }
-        .package-card.featured { background: var(--clr-dark); color: var(--clr-bg); transform: scale(1.05); z-index: 1; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
-        .package-card.featured .package-header h3, .package-card.featured .price { color: var(--clr-gold); }
-        .package-card.featured li { color: #ccc; }
-        .badge { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); background: var(--clr-gold); color: var(--clr-dark); padding: 0.5rem 1.5rem; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
-        .package-header { text-align: center; margin-bottom: 2rem; border-bottom: 1px solid rgba(128,128,128,0.2); padding-bottom: 2rem; }
-        .package-header h3 { font-size: 2rem; }
-        .price { font-family: var(--font-body); font-size: 1.2rem; color: var(--clr-gold); display: block; margin-top: 1rem; }
-        .package-features { margin-bottom: 3rem; }
-        .package-features li { text-align: center; padding: 0.8rem 0; border-bottom: 1px solid rgba(128,128,128,0.1); color: var(--clr-grey); font-size: 0.95rem; }
-        .package-features li:last-child { border: none; }
-        .package-card .btn-outline-dark, .package-card .btn-solid { display: block; width: 100%; text-align: center; }
-
-        footer { background: var(--clr-dark); color: var(--clr-bg); padding: 5rem 2rem 2rem; }
-        .footer-content { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
-        .footer-brand h2 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .footer-brand span { color: var(--clr-gold); }
-        .footer-brand p { color: #999; max-width: 300px; }
-        .footer-content h4 { font-family: var(--font-body); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 1.5rem; color: var(--clr-gold); }
-        .footer-contact a { display: block; color: #ccc; margin-bottom: 1rem; transition: var(--transition); }
-        .footer-contact a:hover { color: var(--clr-gold); padding-left: 5px; }
-        .footer-contact i { margin-right: 10px; }
-        .social-icons { display: flex; gap: 1rem; }
-        .social-icons a { width: 40px; height: 40px; border: 1px solid #444; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #ccc; transition: var(--transition); }
-        .social-icons a:hover { background: var(--clr-gold); border-color: var(--clr-gold); color: var(--clr-dark); }
-        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid #333; color: #666; font-size: 0.9rem; }
-
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
-        @media (max-width: 1024px) {
-            .nav-links, .navbar .btn-outline { display: none; }
-            .hamburger { display: flex; }
-            .hero-content .title { font-size: 3.5rem; }
-        }
-        @media (max-width: 768px) {
-            .section-padding { padding: 5rem 1.5rem; }
-            .section-header h2 { font-size: 2.5rem; }
-            .footer-content { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
-            .footer-brand p { margin: 0 auto; }
-            .social-icons { justify-content: center; }
-            .package-card.featured { transform: scale(1); }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="RXFatih Wedding Studio — Studio kreatif undangan pernikahan digital bespoke, kurasi tema adat Nusantara, dan desain interaktif eksklusif.">
+  <meta name="theme-color" content="#F9F6F0">
+  <title>RXFatih Wedding Studio — Undangan Digital &amp; Kurasi Visual Pernikahan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Langsung ke konten utama</a>
 
-    <div class="preloader"><div class="preloader-text">Rxfatih</div></div>
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a href="#beranda" class="brand" aria-label="RXFatih Wedding Studio Beranda">
+        <span class="brand-monogram" aria-hidden="true">RX</span>
+        <span class="brand-text">
+          <span class="brand-name">RXFatih</span>
+          <span class="brand-sub">Wedding Studio</span>
+        </span>
+      </a>
 
-    <header class="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo">Rxfatih<span>.</span></a>
-            <nav class="nav-links">
-                <a href="#home">Beranda</a>
-                <a href="#services">Layanan</a>
-                <a href="#packages">Paket</a>
-                <a href="gallery.html">Galeri</a>
-            </nav>
-            <a href="checkout.html" class="btn-outline">Reservasi</a>
-            <button class="hamburger" id="hamburger">
-                <span></span><span></span><span></span>
-            </button>
+      <nav class="primary-nav" id="primary-nav" aria-label="Navigasi Utama">
+        <ul class="nav-list">
+          <li><a href="#koleksi" class="nav-link">Koleksi Tema</a></li>
+          <li><a href="#keunggulan" class="nav-link">Standar Karya</a></li>
+          <li><a href="#paket" class="nav-link">Paket &amp; Estimasi</a></li>
+          <li><a href="#alur" class="nav-link">Alur Kerja</a></li>
+        </ul>
+        <div class="nav-mobile-cta">
+          <a href="#konsultasi" class="btn btn-primary">Konsultasi WhatsApp</a>
         </div>
-    </header>
+      </nav>
 
-    <div class="mobile-overlay" id="mobileOverlay"></div>
-    <nav class="mobile-menu" id="mobileMenu">
-        <div class="mobile-menu-header">
-            <span class="logo">Rxfatih<span>.</span></span>
-        </div>
-        <div class="mobile-links">
-            <a href="index.html">Beranda</a>
-            <a href="#services" class="mobile-link">Layanan</a>
-            <a href="#packages" class="mobile-link">Paket</a>
-            <a href="gallery.html">Galeri</a>
-            <a href="checkout.html" class="btn-solid">Reservasi Sekarang</a>
-        </div>
-        <div class="mobile-menu-footer">
-            <p>Jakarta, Indonesia</p>
-            <p>hello@rxfatih.com</p>
-        </div>
-    </nav>
-
-    <section class="hero" id="home">
-        <div class="hero-bg">
-            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop" alt="Luxury Wedding">
-        </div>
-        <div class="hero-content reveal">
-            <p class="subtitle">Luxury Wedding Experience</p>
-            <h1 class="title">Merangkai Kisah<br>Menjadi <em>Mahakarya</em></h1>
-            <a href="#packages" class="btn-solid mt-4">Jelajahi Paket</a>
-        </div>
-    </section>
-
-    <div class="marquee">
-        <div class="marquee-content">
-            <span>Wedding Planner</span><span>•</span><span>Decoration</span><span>•</span><span>Catering</span><span>•</span><span>Photography</span><span>•</span><span>Entertainment</span><span>•</span>
-            <span>Wedding Planner</span><span>•</span><span>Decoration</span><span>•</span><span>Catering</span><span>•</span><span>Photography</span><span>•</span><span>Entertainment</span><span>•</span>
-        </div>
+      <div class="header-actions">
+        <button type="button" class="audio-toggle" id="audio-toggle" aria-pressed="false" aria-label="Putar musik latar suasana">
+          <svg class="icon-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 18V5l12-2v13"></path>
+            <circle cx="6" cy="18" r="3"></circle>
+            <circle cx="18" cy="16" r="3"></circle>
+          </svg>
+          <span class="audio-label">Suasana</span>
+        </button>
+        <a href="#konsultasi" class="btn btn-primary header-cta">Pesan Sekarang</a>
+        <button type="button" class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Buka menu navigasi">
+          <span class="menu-bar"></span>
+          <span class="menu-bar"></span>
+        </button>
+      </div>
     </div>
+  </header>
 
-    <section class="services section-padding" id="services">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="number">01</span>
-                <h2>Layanan <em>Eksklusif</em></h2>
-                <p>Setiap detail dirancang dengan presisi untuk memastikan hari bahagia Anda berjalan sempurna.</p>
+  <main id="main-content">
+    <section class="hero-section" id="beranda">
+      <div class="container hero-grid">
+        <div class="hero-editorial reveal-up">
+          <p class="eyebrow">Atelier Undangan Digital &bull; Indonesia</p>
+          <h1 class="hero-title">
+            Setiap kisah cinta layak dibuka dengan <em>karya yang personal</em>, bukan sekadar template.
+          </h1>
+          <p class="hero-lead">
+            RXFatih Wedding Studio merancang undangan pernikahan digital dengan tipografi editorial, kekayaan ragam hias adat Nusantara, serta interaksi halus yang dirancang khusus untuk karakter acara Anda.
+          </p>
+          <div class="hero-cta-group">
+            <a href="#koleksi" class="btn btn-primary">Jelajahi Koleksi Live</a>
+            <a href="#paket" class="btn btn-secondary">Hitung Estimasi Paket</a>
+          </div>
+          <dl class="hero-pillars">
+            <div class="pillar-item">
+              <dt>Arsitektur Bespoke</dt>
+              <dd>Struktur desain disesuaikan tema acara, bukan cetakan massal.</dd>
             </div>
-            <div class="services-grid">
-                <div class="service-item reveal">
-                    <i class="fa-solid fa-tent"></i>
-                    <h3>Tenda & Dekorasi</h3>
-                    <p>Transformasi venue menjadi ballroom mewah dengan floral dan lighting profesional.</p>
-                </div>
-                <div class="service-item reveal">
-                    <i class="fa-solid fa-utensils"></i>
-                    <h3>Catering Premium</h3>
-                    <p>Sajian kuliner nusantara dan internasional dengan standar bintang lima.</p>
-                </div>
-                <div class="service-item reveal">
-                    <i class="fa-solid fa-camera"></i>
-                    <h3>Dokumentasi</h3>
-                    <p>Abadikan setiap emosi dan momen berharga lewat lensa cinematic kami.</p>
-                </div>
-                <div class="service-item reveal">
-                    <i class="fa-solid fa-music"></i>
-                    <h3>Entertainment</h3>
-                    <p>Sistem tata suara dan pencahayaan kelas atas untuk atmosfer yang sempurna.</p>
-                </div>
+            <div class="pillar-item">
+              <dt>Ragam Adat &amp; Konsep</dt>
+              <dd>Sunda, Bugis, Minangkabau, Jawa hingga konsep interaktif tematik.</dd>
             </div>
+            <div class="pillar-item">
+              <dt>Akses Cepat Mobile</dt>
+              <dd>Dioptimalkan agar tamu membuka undangan secara ringan di ponsel.</dd>
+            </div>
+          </dl>
         </div>
+
+        <div class="hero-visual reveal-up" style="--delay: 140ms;">
+          <div class="editorial-frame">
+            <div class="frame-ornament-top" aria-hidden="true">
+              <span>EDISI KURASI 2026</span>
+              <span>NO. 01 &mdash; RXFATIH</span>
+            </div>
+            <div class="invitation-card-showcase">
+              <div class="crest-mark" aria-hidden="true">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <circle cx="24" cy="24" r="22"></circle>
+                  <circle cx="24" cy="24" r="17" stroke-dasharray="2 3"></circle>
+                  <path d="M24 9L27.5 20.5L39 24L27.5 27.5L24 39L20.5 27.5L9 24L20.5 20.5L24 9Z"></path>
+                </svg>
+              </div>
+              <p class="card-kicker">The Wedding Celebration of</p>
+              <h2 class="card-couple">Alya &amp; Raka</h2>
+              <p class="card-date">Sabtu, 24 Oktober 2026 &bull; Bogor</p>
+              <div class="card-divider" aria-hidden="true"></div>
+              <p class="card-note">
+                Dengan memohon rahmat dan ridho Tuhan Yang Maha Esa, kami mengundang Bapak/Ibu/Saudara/i untuk hadir memberikan doa restu.
+              </p>
+              <a href="#koleksi" class="card-preview-trigger">
+                <span>Uji Pratinjau Interaktif</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                  <path d="M5 12h14M13 5l7 7-7 7"></path>
+                </svg>
+              </a>
+            </div>
+            <div class="frame-caption-bar">
+              <span>Tipografi Editorial &amp; Ornamen Vektor</span>
+              <span class="mono-tag">60FPS MOTION</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section class="packages section-padding bg-light" id="packages">
-        <div class="container">
-            <div class="section-header reveal">
-                <span class="number">02</span>
-                <h2>Koleksi <em>Paket</em></h2>
-                <p>Pilih paket yang paling sesuai dengan visi pernikahan impian Anda.</p>
-            </div>
-            <div class="packages-grid">
-                <div class="package-card reveal">
-                    <div class="package-header">
-                        <h3>The Silver</h3>
-                        <span class="price">IDR 35M</span>
-                    </div>
-                    <ul class="package-features">
-                        <li>Tenda & Dekorasi Standar</li>
-                        <li>Catering 300 Pax</li>
-                        <li>Dokumentasi 4 Jam</li>
-                        <li>Sound System Standar</li>
-                    </ul>
-                    <!-- LINK DIARAHKAN KE CHECKOUT DENGAN PARAMETER PAKET=SILVER -->
-                    <a href="checkout.html?paket=silver" class="btn-outline-dark">Pilih Paket</a>
-                </div>
-                <div class="package-card featured reveal">
-                    <div class="badge">Paling Diminati</div>
-                    <div class="package-header">
-                        <h3>The Gold</h3>
-                        <span class="price">IDR 65M</span>
-                    </div>
-                    <ul class="package-features">
-                        <li>Tenda Roder Premium</li>
-                        <li>Catering 500 Pax (Buffet)</li>
-                        <li>Dokumentasi Full Day + Video</li>
-                        <li>Entertainment & Lighting</li>
-                        <li>Free Wedding Organizer</li>
-                    </ul>
-                    <!-- LINK DIARAHKAN KE CHECKOUT DENGAN PARAMETER PAKET=GOLD -->
-                    <a href="checkout.html?paket=gold" class="btn-solid">Pilih Paket</a>
-                </div>
-                <div class="package-card reveal">
-                    <div class="package-header">
-                        <h3>The Platinum</h3>
-                        <span class="price">IDR 120M</span>
-                    </div>
-                    <ul class="package-features">
-                        <li>Custom Venue Design</li>
-                        <li>Fine Dining Catering 1000 Pax</li>
-                        <li>Cinematic Video + Drone</li>
-                        <li>Live Band & Entertainment</li>
-                        <li>Full Team Dedicated</li>
-                    </ul>
-                    <!-- LINK DIARAHKAN KE CHECKOUT DENGAN PARAMETER PAKET=PLATINUM -->
-                    <a href="checkout.html?paket=platinum" class="btn-outline-dark">Pilih Paket</a>
-                </div>
-            </div>
+    <section class="showcase-section" id="koleksi" aria-labelledby="koleksi-heading">
+      <div class="container">
+        <div class="section-header-split reveal-up">
+          <div>
+            <p class="eyebrow eyebrow-light">Portofolio Terpublikasi</p>
+            <h2 id="koleksi-heading" class="section-title title-light">
+              Eksplorasi tema nyata yang telah kami bangun.
+            </h2>
+          </div>
+          <p class="section-desc desc-light">
+            Pilih salah satu koleksi di bawah untuk melihat karakter palet warna, suasana tipografi, dan membuka tautan demo langsung di peramban Anda.
+          </p>
         </div>
+
+        <div class="theme-tablist" role="tablist" aria-label="Pilih koleksi tema undangan">
+          <button type="button" class="theme-tab" role="tab" id="tab-sunda" aria-selected="true" aria-controls="panel-preview" data-theme="sunda">
+            01. Adat Sunda
+          </button>
+          <button type="button" class="theme-tab" role="tab" id="tab-bugis" aria-selected="false" aria-controls="panel-preview" data-theme="bugis">
+            02. Adat Bugis
+          </button>
+          <button type="button" class="theme-tab" role="tab" id="tab-minang" aria-selected="false" aria-controls="panel-preview" data-theme="minang">
+            03. Adat Minangkabau
+          </button>
+          <button type="button" class="theme-tab" role="tab" id="tab-mario" aria-selected="false" aria-controls="panel-preview" data-theme="mario">
+            04. Retro Super Mario
+          </button>
+        </div>
+
+        <div class="showcase-stage" id="panel-preview" role="tabpanel" aria-labelledby="tab-sunda">
+          <div class="stage-details">
+            <div class="stage-meta">
+              <span class="stage-badge" id="theme-category">Warisan Budaya &bull; Jawa Barat</span>
+              <span class="stage-code" id="theme-code">EDITION // SUNDA-01</span>
+            </div>
+            <h3 class="stage-title" id="theme-title">Sunda Siger &amp; Parahyangan</h3>
+            <p class="stage-description" id="theme-desc">
+              Nuansa hijau zamrud hutan priangan berpadu aksen emas siger Sunda, ornamen mega mendung halus, dan alur sambutan hangat khas tanah Pasundan.
+            </p>
+
+            <div class="palette-strip" aria-label="Komposisi palet warna tema">
+              <span class="palette-label">Palet Warna:</span>
+              <div class="swatch-group" id="theme-swatches"></div>
+            </div>
+
+            <ul class="stage-highlights" id="theme-highlights"></ul>
+
+            <div class="stage-actions">
+              <a href="https://rxfatih-2.github.io/Sunda-wedding-/" target="_blank" rel="noopener noreferrer" class="btn btn-gold" id="theme-live-link">
+                <span>Buka Demo Live</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                  <path d="M7 17L17 7M9 7h8v8"></path>
+                </svg>
+              </a>
+              <button type="button" class="btn btn-outline-light" id="theme-select-for-order">
+                Gunakan Tema Ini
+              </button>
+            </div>
+          </div>
+
+          <div class="stage-device-wrap">
+            <div class="device-mockup" id="device-mockup" data-active-theme="sunda">
+              <div class="device-notch" aria-hidden="true"></div>
+              <div class="device-screen" id="device-screen">
+                <p class="screen-sub" id="screen-sub">Wilujeng Sumping</p>
+                <div class="screen-emblem" id="screen-emblem" aria-hidden="true">
+                  <svg width="44" height="44" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.4">
+                    <path d="M8 32C14 22 20 14 24 10C28 14 34 22 40 32H8Z"></path>
+                    <circle cx="24" cy="24" r="4"></circle>
+                  </svg>
+                </div>
+                <p class="screen-couple" id="screen-couple">Neng Sari &amp; Kang Dimas</p>
+                <p class="screen-venue" id="screen-venue">Gedong Sate Heritage Hall &bull; Bandung</p>
+                <div class="screen-pill" id="screen-pill">Buka Undangan</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <footer id="contact">
-        <div class="container footer-content">
-            <div class="footer-brand">
-                <h2>Rxfatih<span>.</span></h2>
-                <p>Mewujudkan pernikahan impian dengan sentuhan seni dan presisi tanpa kompromi.</p>
-            </div>
-            <div class="footer-contact">
-                <h4>Hubungi Kami</h4>
-                <a href="https://wa.me/6285774072881" target="_blank"><i class="fa-brands fa-whatsapp"></i> +62 857 7407 2881</a>
-                <a href="mailto:projetexschool@gmail.com"><i class="fa-solid fa-envelope"></i> projetexschool@gmail.com</a>
-            </div>
-            <div class="social-icons">
-    <a href="https://instagram.com/xschool_creative" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-    <a href="https://tiktok.com/@rxfatih5" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+    <section class="craft-section" id="keunggulan" aria-labelledby="keunggulan-heading">
+      <div class="container">
+        <div class="craft-layout">
+          <div class="craft-intro reveal-up">
+            <p class="eyebrow">Mengapa RXFatih Berbeda</p>
+            <h2 id="keunggulan-heading" class="section-title">
+              Dirancang dari nol sebagai pengalaman digital, bukan formulir kaku.
+            </h2>
+            <p class="section-desc">
+              Banyak undangan digital terasa seragam karena hanya mengganti foto pada kerangka yang sama. Kami membangun identitas visual yang menyatu dengan cerita dan adat pasangan.
+            </p>
+          </div>
 
-            </div>
-            </div>
+          <div class="craft-list">
+            <article class="craft-row reveal-up">
+              <span class="craft-index">01</span>
+              <div class="craft-body">
+                <h3>Tipografi &amp; Tata Letak Editorial</h3>
+                <p>Kombinasi huruf serif berkarakter dengan ruang negatif yang lapang sehingga nama mempelai, jadwal akad, dan kutipan doa terbaca anggun seperti buku seni.</p>
+              </div>
+            </article>
+
+            <article class="craft-row reveal-up">
+              <span class="craft-index">02</span>
+              <div class="craft-body">
+                <h3>Kustomisasi Adat Nusantara &amp; Konsep Unik</h3>
+                <p>Mulai dari pakem Sunda, Bugis, Minangkabau, dan Jawa hingga konsep tematik kreatif seperti gim retro—setiap ornamen digambar sesuai estetika acara.</p>
+              </div>
+            </article>
+
+            <article class="craft-row reveal-up">
+              <span class="craft-index">03</span>
+              <div class="craft-body">
+                <h3>Navigasi Tamu Tanpa Hambatan</h3>
+                <p>Integrasi langsung ke Google Maps lokasi acara, pengingat kalender, amplop digital dengan salin nomor rekening sekali ketuk, serta konfirmasi kehadiran via WhatsApp.</p>
+              </div>
+            </article>
+
+            <article class="craft-row reveal-up">
+              <span class="craft-index">04</span>
+              <div class="craft-body">
+                <h3>Performa Ringan di Seluruh Ponsel</h3>
+                <p>Kode bersih tanpa skrip berat yang memperlambat peramban tamu, memastikan animasi berjalan mulus baik di jaringan seluler maupun Wi-Fi.</p>
+              </div>
+            </article>
+          </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Rxfatih Atelier. All Rights Reserved.</p>
+      </div>
+    </section>
+
+    <section class="packages-section" id="paket" aria-labelledby="paket-heading">
+      <div class="container">
+        <div class="section-header-center reveal-up">
+          <p class="eyebrow">Transparansi Investasi</p>
+          <h2 id="paket-heading" class="section-title">
+            Susun paket undangan sesuai kebutuhan acara Anda.
+          </h2>
+          <p class="section-desc">
+            Pilih paket dasar dan tambahkan fitur pendukung untuk melihat estimasi biaya secara langsung sebelum berkonsultasi.
+          </p>
         </div>
-    </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const preloader = document.querySelector('.preloader');
-            if (preloader) { window.addEventListener('load', () => { preloader.style.opacity = '0'; setTimeout(() => preloader.style.display = 'none', 600); }); }
+        <div class="configurator-grid">
+          <div class="tier-selector" role="radiogroup" aria-label="Pilih paket dasar">
+            <label class="tier-card is-selected" data-tier="essential" data-price="199000">
+              <input type="radio" name="wedding_tier" value="Essential (Rp 199.000)" checked class="sr-only">
+              <div class="tier-top">
+                <span class="tier-name">Essential</span>
+                <span class="tier-price">Rp 199.000</span>
+              </div>
+              <p class="tier-summary">Pilihan ringkas dan elegan untuk acara intim dengan informasi inti yang lengkap.</p>
+              <ul class="tier-features">
+                <li>Pilihan koleksi tema kurasi RXFatih</li>
+                <li>Hitung mundur waktu akad &amp; resepsi</li>
+                <li>Integrasi peta lokasi &amp; amplop digital</li>
+                <li>Aktif selama 6 bulan</li>
+              </ul>
+            </label>
 
-            const navbar = document.querySelector('.navbar');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) navbar.classList.add('scrolled');
-                else { if (document.querySelector('.hero')) navbar.classList.remove('scrolled'); }
-            });
+            <label class="tier-card" data-tier="signature" data-price="349000">
+              <input type="radio" name="wedding_tier" value="Signature Adat (Rp 349.000)" class="sr-only">
+              <div class="tier-top">
+                <span class="tier-name">Signature Adat <span class="tier-badge">Populer</span></span>
+                <span class="tier-price">Rp 349.000</span>
+              </div>
+              <p class="tier-summary">Penyesuaian ornamen adat daerah, galeri foto penuh, dan musik latar kurasi.</p>
+              <ul class="tier-features">
+                <li>Kustomisasi warna &amp; ornamen adat Nusantara</li>
+                <li>Galeri hingga 15 foto &amp; kisah perjalanan cinta</li>
+                <li>Musik latar MP3 pilihan &amp; nama tamu otomatis</li>
+                <li>Aktif selama 1 tahun penuh</li>
+              </ul>
+            </label>
 
-            const hamburger = document.getElementById('hamburger');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const mobileOverlay = document.getElementById('mobileOverlay');
+            <label class="tier-card" data-tier="royal" data-price="599000">
+              <input type="radio" name="wedding_tier" value="Royal Bespoke (Rp 599.000)" class="sr-only">
+              <div class="tier-top">
+                <span class="tier-name">Royal Bespoke</span>
+                <span class="tier-price">Rp 599.000</span>
+              </div>
+              <p class="tier-summary">Desain eksklusif dari nol dengan animasi pembuka khusus dan prioritas pengerjaan.</p>
+              <ul class="tier-features">
+                <li>Konsep visual &amp; animasi pembuka dirancang khusus</li>
+                <li>Revisi tata letak &amp; tipografi prioritas</li>
+                <li>Subdomain khusus nama pasangan</li>
+                <li>Masa aktif permanen (arsip digital)</li>
+              </ul>
+            </label>
+          </div>
 
-            if (hamburger && mobileMenu) {
-                function toggleMenu() {
-                    hamburger.classList.toggle('active');
-                    mobileMenu.classList.toggle('active');
-                    mobileOverlay.classList.toggle('active');
-                    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
-                }
-                hamburger.addEventListener('click', toggleMenu);
-                mobileOverlay.addEventListener('click', toggleMenu);
+          <aside class="estimate-panel" aria-label="Ringkasan estimasi paket">
+            <h3 class="estimate-heading">Fitur Tambahan Opsional</h3>
+            <div class="addon-list">
+              <label class="addon-item">
+                <input type="checkbox" class="addon-checkbox" value="Custom Domain (.com / .id)" data-addon-price="180000">
+                <span class="addon-info">
+                  <span class="addon-title">Custom Domain (.com / .id)</span>
+                  <span class="addon-sub">Tautan pribadi seperti alyaraka.com</span>
+                </span>
+                <span class="addon-cost">+Rp 180.000</span>
+              </label>
 
-                // FIX HAMBURGER LINKS: Tutup menu otomatis saat link diklik
-                const mobileLinks = document.querySelectorAll('.mobile-links a');
-                mobileLinks.forEach(link => {
-                    link.addEventListener('click', () => {
-                        hamburger.classList.remove('active');
-                        mobileMenu.classList.remove('active');
-                        mobileOverlay.classList.remove('active');
-                        document.body.style.overflow = '';
-                    });
-                });
-            }
+              <label class="addon-item">
+                <input type="checkbox" class="addon-checkbox" value="Video Opening Gate" data-addon-price="120000">
+                <span class="addon-info">
+                  <span class="addon-title">Gerbang Pembuka Sinematik</span>
+                  <span class="addon-sub">Animasi tirai atau ilustrasi pembuka khusus</span>
+                </span>
+                <span class="addon-cost">+Rp 120.000</span>
+              </label>
 
-            const reveals = document.querySelectorAll('.reveal');
-            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) { entry.target.classList.add('active'); observer.unobserve(entry.target); }
-                });
-            }, { threshold: 0.15 });
-            reveals.forEach(reveal => revealOnScroll.observe(reveal));
-        });
-    </script>
+              <label class="addon-item">
+                <input type="checkbox" class="addon-checkbox" value="Layanan Input Daftar Tamu" data-addon-price="75000">
+                <span class="addon-info">
+                  <span class="addon-title">Bantuan Input Daftar Tamu</span>
+                  <span class="addon-sub">Penyiapan hingga 250 tautan nama tamu personal</span>
+                </span>
+                <span class="addon-cost">+Rp 75.000</span>
+              </label>
+            </div>
+
+            <div class="estimate-total-box" aria-live="polite">
+              <div class="total-row">
+                <span>Estimasi Total</span>
+                <strong class="total-amount" id="total-amount">Rp 199.000</strong>
+              </div>
+              <p class="total-note">Tidak ada biaya tersembunyi. Pembayaran dilakukan setelah draf awal disetujui.</p>
+            </div>
+
+            <a href="#konsultasi" class="btn btn-primary btn-full" id="apply-estimate-btn">
+              Kirim Konfigurasi ke WhatsApp
+            </a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="process-section" id="alur" aria-labelledby="alur-heading">
+      <div class="container">
+        <div class="section-header-split reveal-up">
+          <div>
+            <p class="eyebrow">Alur Pengerjaan</p>
+            <h2 id="alur-heading" class="section-title">Dari konsep hingga siap dibagikan dalam 4 langkah terstruktur.</h2>
+          </div>
+          <p class="section-desc">
+            Komunikasi langsung bersama desainer tanpa perantara berlapis agar setiap detail nama, gelar keluarga, dan lokasi akurat.
+          </p>
+        </div>
+
+        <ol class="process-steps">
+          <li class="step-card reveal-up">
+            <span class="step-num">Langkah 01</span>
+            <h3>Diskusi Konsep &amp; Tema</h3>
+            <p>Tentukan nuansa adat, palet warna, atau referensi visual yang paling mewakili karakter pernikahan Anda.</p>
+          </li>
+          <li class="step-card reveal-up">
+            <span class="step-num">Langkah 02</span>
+            <h3>Pengiriman Materi Acara</h3>
+            <p>Kirimkan data mempelai, susunan acara akad dan resepsi, foto prewedding, serta pilihan musik latar.</p>
+          </li>
+          <li class="step-card reveal-up">
+            <span class="step-num">Langkah 03</span>
+            <h3>Perancangan &amp; Pratinjau</h3>
+            <p>Kami menyusun antarmuka interaktif dan mengirimkan tautan pratinjau langsung untuk Anda uji di ponsel.</p>
+          </li>
+          <li class="step-card reveal-up">
+            <span class="step-num">Langkah 04</span>
+            <h3>Finalisasi &amp; Publikasi</h3>
+            <p>Setelah seluruh detail disetujui, tautan undangan siap dibagikan kepada seluruh keluarga dan tamu kehormatan.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="booking-section" id="konsultasi" aria-labelledby="konsultasi-heading">
+      <div class="container booking-grid">
+        <div class="booking-info reveal-up">
+          <p class="eyebrow">Mulai Konsultasi</p>
+          <h2 id="konsultasi-heading" class="section-title">
+            Ceritakan rencana hari bahagia Anda.
+          </h2>
+          <p class="section-desc">
+            Isi ringkasan di samping untuk menyusun pesan pemesanan otomatis yang langsung terhubung ke WhatsApp resmi RXFatih Wedding Studio.
+          </p>
+          <div class="contact-direct-box">
+            <div class="contact-item">
+              <span class="contact-label">Studio &amp; Operasional</span>
+              <span class="contact-val">Bogor, Jawa Barat &mdash; Melayani Seluruh Indonesia</span>
+            </div>
+            <div class="contact-item">
+              <span class="contact-label">Jam Konsultasi</span>
+              <span class="contact-val">Senin &ndash; Minggu, 09.00 &ndash; 21.00 WIB</span>
+            </div>
+          </div>
+        </div>
+
+        <form class="booking-form reveal-up" id="whatsapp-booking-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="couple-names">Nama Pasangan Mempelai <span aria-hidden="true">*</span></label>
+              <input type="text" id="couple-names" name="coupleNames" placeholder="Contoh: Alya &amp; Raka" autocomplete="name" required>
+              <span class="field-error" id="error-couple-names" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="event-date">Perkiraan Tanggal Acara <span aria-hidden="true">*</span></label>
+              <input type="date" id="event-date" name="eventDate" required>
+              <span class="field-error" id="error-event-date" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="selected-theme">Pilihan Tema Utama</label>
+              <select id="selected-theme" name="selectedTheme">
+                <option value="Adat Sunda (Siger & Parahyangan)">Adat Sunda (Siger &amp; Parahyangan)</option>
+                <option value="Adat Bugis (Sutera & Saoraja)">Adat Bugis (Sutera &amp; Saoraja)</option>
+                <option value="Adat Minangkabau (Suntiang & Gadang)">Adat Minangkabau (Suntiang &amp; Gadang)</option>
+                <option value="Adat Jawa (Keraton Klasik)">Adat Jawa (Keraton Klasik)</option>
+                <option value="Retro Super Mario (Interaktif)">Retro Super Mario (Interaktif)</option>
+                <option value="Kustom Eksklusif Baru">Kustom Eksklusif Baru</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="selected-package">Paket &amp; Estimasi</label>
+              <input type="text" id="selected-package" name="selectedPackage" value="Essential (Rp 199.000)" readonly>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="client-notes">Catatan Konsep atau Pertanyaan</label>
+            <textarea id="client-notes" name="clientNotes" rows="3" placeholder="Tuliskan nuansa warna, adat daerah, atau permintaan khusus yang diinginkan..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full" id="submit-booking-btn">
+            <span>Lanjutkan ke WhatsApp</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7"></path>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="closing">
+    <div class="container closing-inner">
+      <div class="closing-top">
+        <div class="closing-brand">
+          <span class="brand-monogram" aria-hidden="true">RX</span>
+          <div>
+            <p class="closing-title">RXFatih Wedding Studio</p>
+            <p class="closing-tagline">Merangkai undangan digital berkarakter dengan penghormatan pada budaya dan detail visual.</p>
+          </div>
+        </div>
+        <div class="closing-links">
+          <a href="#beranda">Beranda</a>
+          <a href="#koleksi">Koleksi Tema</a>
+          <a href="#paket">Paket</a>
+          <a href="https://rxfatih-2.github.io/Portofolio-/" target="_blank" rel="noopener noreferrer">Portofolio Utama</a>
+        </div>
+      </div>
+      <div class="closing-bottom">
+        <p>&copy; <span id="current-year">2026</span> RXFatih Wedding Studio. Hak cipta dilindungi.</p>
+        <p>Dirancang &amp; dikembangkan oleh RXFatih.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Letakkan file MP3 lokal Anda di ./assets/music.mp3 jika ingin mengganti nada suasana bawaan -->
+  <audio id="bg-music" loop preload="none">
+    <source src="assets/music.mp3" type="audio/mpeg">
+  </audio>
+
+  <script src="script.js"></script>
 </body>
 </html>
